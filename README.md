@@ -63,7 +63,6 @@ Special thanks to Karim Aboussel Ham whose repository ISLP-applied-solutions pro
 ## 👤 Author
 Shad Ali Shah
 MPhil Economics — Quaid-i-Azam University
-
 GitHub: https://github.com/shadalishah
 LinkedIn: https://www.linkedin.com/in/shad-ali-shah-6439ab339/
 
