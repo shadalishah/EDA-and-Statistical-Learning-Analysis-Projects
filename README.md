@@ -100,7 +100,7 @@ jupyter notebook Chapter_2.ipynb
 
 ## 🙏 Acknowledgements
 
-Special thanks to **[Karim Aboussel Ham](https://github.com/KarimABOUSSELHAM)** whose repository [ISLP-applied-solutions](https://github.com/KarimABOUSSELHAM/ISLP-applied-solutions) provided helpful code examples and guidance during the completion of these exercises.
+Special thanks to **[Karim Aboussel Ham](https://github.com/KarimABOUSSELHAM)** whose repository [ISLP-applied-solutions](https://github.com/KarimABOUSSELHAM/ISLP-applied-solutions) provided useful guidance and reference during the completion of this project.
 
 ---
 
