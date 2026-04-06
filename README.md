@@ -61,10 +61,10 @@ jupyter notebook Chapter_2.ipynb
 Special thanks to Karim Aboussel Ham whose repository ISLP-applied-solutions provided helpful code examples and guidance during the completion of this project.
 
 ## 👤 Author
-Shad Ali Shah
-MPhil Economics — Quaid-i-Azam University
-GitHub: https://github.com/shadalishah
-LinkedIn: https://www.linkedin.com/in/shad-ali-shah-6439ab339/
+## Shad Ali Shah
+## MPhil Economics — Quaid-i-Azam University Islamabad Pakistan
+## GitHub: https://github.com/shadalishah
+## LinkedIn: https://www.linkedin.com/in/shad-ali-shah-6439ab339/
 
 ## 📚 Reference
 An Introduction to Statistical Learning with Applications in Python https://www.statlearning.com/
