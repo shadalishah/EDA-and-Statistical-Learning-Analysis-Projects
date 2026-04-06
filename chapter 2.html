@@ -1,0 +1,3267 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Shad Ali Shah">
+<meta name="dcterms.date" content="2025-12-02">
+
+<title>Statistical Learning Analysis Report</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="chapter 2_files/libs/clipboard/clipboard.min.js"></script>
+<script src="chapter 2_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="chapter 2_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="chapter 2_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="chapter 2_files/libs/quarto-html/popper.min.js"></script>
+<script src="chapter 2_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="chapter 2_files/libs/quarto-html/anchor.min.js"></script>
+<link href="chapter 2_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="chapter 2_files/libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="chapter 2_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="chapter 2_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="chapter 2_files/libs/bootstrap/bootstrap-4d7f0bce1131f3e5f9547cd857cfbfc8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul class="collapse">
+  <li><a href="#exercise-8" id="toc-exercise-8" class="nav-link active" data-scroll-target="#exercise-8"><span class="header-section-number">1</span> Exercise 8</a></li>
+  <li><a href="#exercise-9" id="toc-exercise-9" class="nav-link" data-scroll-target="#exercise-9"><span class="header-section-number">2</span> Exercise 9</a></li>
+  <li><a href="#exercise-10" id="toc-exercise-10" class="nav-link" data-scroll-target="#exercise-10"><span class="header-section-number">3</span> Exercise 10</a></li>
+  </ul>
+</nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Statistical Learning Analysis Report</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<p class="subtitle lead">Chapter 2: ISLR2 Exercise Solutions</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Shad Ali Shah </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">December 2, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="exercise-8" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="exercise-8"><span class="header-section-number">1</span> Exercise 8</h2>
+<div id="1345bf29" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ISLP <span class="im">import</span> load_data</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.pyplot <span class="im">import</span> subplots</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<section id="a" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="a"><span class="header-section-number">1.1</span> (a)</h3>
+<div id="e68bee00" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>college<span class="op">=</span>pd.read_csv(<span class="st">'College.csv'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="b" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="b"><span class="header-section-number">1.2</span> (b)</h3>
+<div id="3f96fdae" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>college.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Unnamed: 0</th>
+<th data-quarto-table-cell-role="th">Private</th>
+<th data-quarto-table-cell-role="th">Apps</th>
+<th data-quarto-table-cell-role="th">Accept</th>
+<th data-quarto-table-cell-role="th">Enroll</th>
+<th data-quarto-table-cell-role="th">Top10perc</th>
+<th data-quarto-table-cell-role="th">Top25perc</th>
+<th data-quarto-table-cell-role="th">F.Undergrad</th>
+<th data-quarto-table-cell-role="th">P.Undergrad</th>
+<th data-quarto-table-cell-role="th">Outstate</th>
+<th data-quarto-table-cell-role="th">Room.Board</th>
+<th data-quarto-table-cell-role="th">Books</th>
+<th data-quarto-table-cell-role="th">Personal</th>
+<th data-quarto-table-cell-role="th">PhD</th>
+<th data-quarto-table-cell-role="th">Terminal</th>
+<th data-quarto-table-cell-role="th">S.F.Ratio</th>
+<th data-quarto-table-cell-role="th">perc.alumni</th>
+<th data-quarto-table-cell-role="th">Expend</th>
+<th data-quarto-table-cell-role="th">Grad.Rate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>0</td>
+<td>Yes</td>
+<td>1660</td>
+<td>1232</td>
+<td>721</td>
+<td>23</td>
+<td>52</td>
+<td>2885</td>
+<td>537</td>
+<td>7440</td>
+<td>3300</td>
+<td>450</td>
+<td>2200</td>
+<td>70</td>
+<td>78</td>
+<td>18.1</td>
+<td>12</td>
+<td>7041</td>
+<td>60</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>1</td>
+<td>Yes</td>
+<td>2186</td>
+<td>1924</td>
+<td>512</td>
+<td>16</td>
+<td>29</td>
+<td>2683</td>
+<td>1227</td>
+<td>12280</td>
+<td>6450</td>
+<td>750</td>
+<td>1500</td>
+<td>29</td>
+<td>30</td>
+<td>12.2</td>
+<td>16</td>
+<td>10527</td>
+<td>56</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>2</td>
+<td>Yes</td>
+<td>1428</td>
+<td>1097</td>
+<td>336</td>
+<td>22</td>
+<td>50</td>
+<td>1036</td>
+<td>99</td>
+<td>11250</td>
+<td>3750</td>
+<td>400</td>
+<td>1165</td>
+<td>53</td>
+<td>66</td>
+<td>12.9</td>
+<td>30</td>
+<td>8735</td>
+<td>54</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>3</td>
+<td>Yes</td>
+<td>417</td>
+<td>349</td>
+<td>137</td>
+<td>60</td>
+<td>89</td>
+<td>510</td>
+<td>63</td>
+<td>12960</td>
+<td>5450</td>
+<td>450</td>
+<td>875</td>
+<td>92</td>
+<td>97</td>
+<td>7.7</td>
+<td>37</td>
+<td>19016</td>
+<td>59</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>4</td>
+<td>Yes</td>
+<td>193</td>
+<td>146</td>
+<td>55</td>
+<td>16</td>
+<td>44</td>
+<td>249</td>
+<td>869</td>
+<td>7560</td>
+<td>4120</td>
+<td>800</td>
+<td>1500</td>
+<td>76</td>
+<td>72</td>
+<td>11.9</td>
+<td>2</td>
+<td>10922</td>
+<td>15</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="a2900d76" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>college2 <span class="op">=</span> pd.read_csv(<span class="st">'College.csv'</span>, index_col <span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>college3 <span class="op">=</span> college.rename({<span class="st">'Unnamed: 0'</span>: <span class="st">'College'</span>},axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>college3 <span class="op">=</span> college3.set_index(<span class="st">'College'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="fffd381b" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>college<span class="op">=</span>college3</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="1a6551c2" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>college.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Private</th>
+<th data-quarto-table-cell-role="th">Apps</th>
+<th data-quarto-table-cell-role="th">Accept</th>
+<th data-quarto-table-cell-role="th">Enroll</th>
+<th data-quarto-table-cell-role="th">Top10perc</th>
+<th data-quarto-table-cell-role="th">Top25perc</th>
+<th data-quarto-table-cell-role="th">F.Undergrad</th>
+<th data-quarto-table-cell-role="th">P.Undergrad</th>
+<th data-quarto-table-cell-role="th">Outstate</th>
+<th data-quarto-table-cell-role="th">Room.Board</th>
+<th data-quarto-table-cell-role="th">Books</th>
+<th data-quarto-table-cell-role="th">Personal</th>
+<th data-quarto-table-cell-role="th">PhD</th>
+<th data-quarto-table-cell-role="th">Terminal</th>
+<th data-quarto-table-cell-role="th">S.F.Ratio</th>
+<th data-quarto-table-cell-role="th">perc.alumni</th>
+<th data-quarto-table-cell-role="th">Expend</th>
+<th data-quarto-table-cell-role="th">Grad.Rate</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">College</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Yes</td>
+<td>1660</td>
+<td>1232</td>
+<td>721</td>
+<td>23</td>
+<td>52</td>
+<td>2885</td>
+<td>537</td>
+<td>7440</td>
+<td>3300</td>
+<td>450</td>
+<td>2200</td>
+<td>70</td>
+<td>78</td>
+<td>18.1</td>
+<td>12</td>
+<td>7041</td>
+<td>60</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Yes</td>
+<td>2186</td>
+<td>1924</td>
+<td>512</td>
+<td>16</td>
+<td>29</td>
+<td>2683</td>
+<td>1227</td>
+<td>12280</td>
+<td>6450</td>
+<td>750</td>
+<td>1500</td>
+<td>29</td>
+<td>30</td>
+<td>12.2</td>
+<td>16</td>
+<td>10527</td>
+<td>56</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Yes</td>
+<td>1428</td>
+<td>1097</td>
+<td>336</td>
+<td>22</td>
+<td>50</td>
+<td>1036</td>
+<td>99</td>
+<td>11250</td>
+<td>3750</td>
+<td>400</td>
+<td>1165</td>
+<td>53</td>
+<td>66</td>
+<td>12.9</td>
+<td>30</td>
+<td>8735</td>
+<td>54</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Yes</td>
+<td>417</td>
+<td>349</td>
+<td>137</td>
+<td>60</td>
+<td>89</td>
+<td>510</td>
+<td>63</td>
+<td>12960</td>
+<td>5450</td>
+<td>450</td>
+<td>875</td>
+<td>92</td>
+<td>97</td>
+<td>7.7</td>
+<td>37</td>
+<td>19016</td>
+<td>59</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>Yes</td>
+<td>193</td>
+<td>146</td>
+<td>55</td>
+<td>16</td>
+<td>44</td>
+<td>249</td>
+<td>869</td>
+<td>7560</td>
+<td>4120</td>
+<td>800</td>
+<td>1500</td>
+<td>76</td>
+<td>72</td>
+<td>11.9</td>
+<td>2</td>
+<td>10922</td>
+<td>15</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="c" class="level3" data-number="1.3">
+<h3 data-number="1.3" class="anchored" data-anchor-id="c"><span class="header-section-number">1.3</span> (c)</h3>
+<div id="5c604d2d" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>college.describe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Apps</th>
+<th data-quarto-table-cell-role="th">Accept</th>
+<th data-quarto-table-cell-role="th">Enroll</th>
+<th data-quarto-table-cell-role="th">Top10perc</th>
+<th data-quarto-table-cell-role="th">Top25perc</th>
+<th data-quarto-table-cell-role="th">F.Undergrad</th>
+<th data-quarto-table-cell-role="th">P.Undergrad</th>
+<th data-quarto-table-cell-role="th">Outstate</th>
+<th data-quarto-table-cell-role="th">Room.Board</th>
+<th data-quarto-table-cell-role="th">Books</th>
+<th data-quarto-table-cell-role="th">Personal</th>
+<th data-quarto-table-cell-role="th">PhD</th>
+<th data-quarto-table-cell-role="th">Terminal</th>
+<th data-quarto-table-cell-role="th">S.F.Ratio</th>
+<th data-quarto-table-cell-role="th">perc.alumni</th>
+<th data-quarto-table-cell-role="th">Expend</th>
+<th data-quarto-table-cell-role="th">Grad.Rate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">count</th>
+<td>777.000000</td>
+<td>777.000000</td>
+<td>777.000000</td>
+<td>777.000000</td>
+<td>777.000000</td>
+<td>777.000000</td>
+<td>777.000000</td>
+<td>777.000000</td>
+<td>777.000000</td>
+<td>777.000000</td>
+<td>777.000000</td>
+<td>777.000000</td>
+<td>777.000000</td>
+<td>777.000000</td>
+<td>777.000000</td>
+<td>777.000000</td>
+<td>777.00000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">mean</th>
+<td>3001.638353</td>
+<td>2018.804376</td>
+<td>779.972973</td>
+<td>27.558559</td>
+<td>55.796654</td>
+<td>3699.907336</td>
+<td>855.298584</td>
+<td>10440.669241</td>
+<td>4357.526384</td>
+<td>549.380952</td>
+<td>1340.642214</td>
+<td>72.660232</td>
+<td>79.702703</td>
+<td>14.089704</td>
+<td>22.743887</td>
+<td>9660.171171</td>
+<td>65.46332</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">std</th>
+<td>3870.201484</td>
+<td>2451.113971</td>
+<td>929.176190</td>
+<td>17.640364</td>
+<td>19.804778</td>
+<td>4850.420531</td>
+<td>1522.431887</td>
+<td>4023.016484</td>
+<td>1096.696416</td>
+<td>165.105360</td>
+<td>677.071454</td>
+<td>16.328155</td>
+<td>14.722359</td>
+<td>3.958349</td>
+<td>12.391801</td>
+<td>5221.768440</td>
+<td>17.17771</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">min</th>
+<td>81.000000</td>
+<td>72.000000</td>
+<td>35.000000</td>
+<td>1.000000</td>
+<td>9.000000</td>
+<td>139.000000</td>
+<td>1.000000</td>
+<td>2340.000000</td>
+<td>1780.000000</td>
+<td>96.000000</td>
+<td>250.000000</td>
+<td>8.000000</td>
+<td>24.000000</td>
+<td>2.500000</td>
+<td>0.000000</td>
+<td>3186.000000</td>
+<td>10.00000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">25%</th>
+<td>776.000000</td>
+<td>604.000000</td>
+<td>242.000000</td>
+<td>15.000000</td>
+<td>41.000000</td>
+<td>992.000000</td>
+<td>95.000000</td>
+<td>7320.000000</td>
+<td>3597.000000</td>
+<td>470.000000</td>
+<td>850.000000</td>
+<td>62.000000</td>
+<td>71.000000</td>
+<td>11.500000</td>
+<td>13.000000</td>
+<td>6751.000000</td>
+<td>53.00000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">50%</th>
+<td>1558.000000</td>
+<td>1110.000000</td>
+<td>434.000000</td>
+<td>23.000000</td>
+<td>54.000000</td>
+<td>1707.000000</td>
+<td>353.000000</td>
+<td>9990.000000</td>
+<td>4200.000000</td>
+<td>500.000000</td>
+<td>1200.000000</td>
+<td>75.000000</td>
+<td>82.000000</td>
+<td>13.600000</td>
+<td>21.000000</td>
+<td>8377.000000</td>
+<td>65.00000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">75%</th>
+<td>3624.000000</td>
+<td>2424.000000</td>
+<td>902.000000</td>
+<td>35.000000</td>
+<td>69.000000</td>
+<td>4005.000000</td>
+<td>967.000000</td>
+<td>12925.000000</td>
+<td>5050.000000</td>
+<td>600.000000</td>
+<td>1700.000000</td>
+<td>85.000000</td>
+<td>92.000000</td>
+<td>16.500000</td>
+<td>31.000000</td>
+<td>10830.000000</td>
+<td>78.00000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">max</th>
+<td>48094.000000</td>
+<td>26330.000000</td>
+<td>6392.000000</td>
+<td>96.000000</td>
+<td>100.000000</td>
+<td>31643.000000</td>
+<td>21836.000000</td>
+<td>21700.000000</td>
+<td>8124.000000</td>
+<td>2340.000000</td>
+<td>6800.000000</td>
+<td>103.000000</td>
+<td>100.000000</td>
+<td>39.800000</td>
+<td>64.000000</td>
+<td>56233.000000</td>
+<td>118.00000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="d" class="level3" data-number="1.4">
+<h3 data-number="1.4" class="anchored" data-anchor-id="d"><span class="header-section-number">1.4</span> (d)</h3>
+<div id="a72fe55e" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>pd.plotting.scatter_matrix(college[[<span class="st">'Top10perc'</span>,<span class="st">'Apps'</span>,<span class="st">'Enroll'</span>]])<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="chapter%202_files/figure-html/cell-9-output-1.png" width="565" height="377" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="e" class="level3" data-number="1.5">
+<h3 data-number="1.5" class="anchored" data-anchor-id="e"><span class="header-section-number">1.5</span> (e)</h3>
+<div id="e4742ebc" class="cell" data-execution_count="9">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>college.boxplot(<span class="st">'Outstate'</span>, by<span class="op">=</span><span class="st">'Private'</span>, ax<span class="op">=</span>ax)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="chapter%202_files/figure-html/cell-10-output-1.png" width="685" height="697" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="f" class="level3" data-number="1.6">
+<h3 data-number="1.6" class="anchored" data-anchor-id="f"><span class="header-section-number">1.6</span> (f)</h3>
+<div id="3b451460" class="cell" data-execution_count="10">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>college[<span class="st">'Elite'</span>] <span class="op">=</span> pd.cut(college[<span class="st">'Top10perc'</span>],bins<span class="op">=</span><span class="dv">2</span>,labels<span class="op">=</span>[<span class="st">'No'</span>,<span class="st">'Yes'</span>])</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#The exact formula provided by the exercise instructions did not work. In fact many observations </span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#remained void.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="f153fe3a" class="cell" data-execution_count="11">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>college.value_counts(college[<span class="st">'Elite'</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>Elite
+No     687
+Yes     90
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+<div id="8799039b" class="cell" data-execution_count="12">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>college.boxplot(<span class="st">'Outstate'</span>, by<span class="op">=</span><span class="st">'Elite'</span>, ax<span class="op">=</span>ax)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="chapter%202_files/figure-html/cell-13-output-1.png" width="685" height="697" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="g" class="level3" data-number="1.7">
+<h3 data-number="1.7" class="anchored" data-anchor-id="g"><span class="header-section-number">1.7</span> (g)</h3>
+<div id="3336e343" class="cell" data-execution_count="13">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span>plt.subplots(nrows<span class="op">=</span><span class="dv">2</span>,ncols<span class="op">=</span> <span class="dv">2</span>,figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">12</span>))</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>college[<span class="st">'Apps'</span>].plot.hist(ax<span class="op">=</span>axes[<span class="dv">0</span>,<span class="dv">0</span>])</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>college[<span class="st">'Accept'</span>].plot.hist(ax<span class="op">=</span>axes[<span class="dv">0</span>,<span class="dv">1</span>])</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>college[<span class="st">'Enroll'</span>].plot.hist(ax<span class="op">=</span>axes[<span class="dv">1</span>,<span class="dv">0</span>])</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>college[<span class="st">'Outstate'</span>].plot.hist(ax<span class="op">=</span>axes[<span class="dv">1</span>,<span class="dv">1</span>])<span class="op">;</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># We can create bins for each of the plotted columns</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="chapter%202_files/figure-html/cell-14-output-1.png" width="983" height="929" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="h" class="level3" data-number="1.8">
+<h3 data-number="1.8" class="anchored" data-anchor-id="h"><span class="header-section-number">1.8</span> (h)</h3>
+<p>First off, let’s explore the type of each of the data set features. We can use the info() fiunction for this.</p>
+<div id="84c4c0d4" class="cell" data-execution_count="14">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>college.info()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+Index: 777 entries, 0 to 776
+Data columns (total 19 columns):
+ #   Column       Non-Null Count  Dtype   
+---  ------       --------------  -----   
+ 0   Private      777 non-null    object  
+ 1   Apps         777 non-null    int64   
+ 2   Accept       777 non-null    int64   
+ 3   Enroll       777 non-null    int64   
+ 4   Top10perc    777 non-null    int64   
+ 5   Top25perc    777 non-null    int64   
+ 6   F.Undergrad  777 non-null    int64   
+ 7   P.Undergrad  777 non-null    int64   
+ 8   Outstate     777 non-null    int64   
+ 9   Room.Board   777 non-null    int64   
+ 10  Books        777 non-null    int64   
+ 11  Personal     777 non-null    int64   
+ 12  PhD          777 non-null    int64   
+ 13  Terminal     777 non-null    int64   
+ 14  S.F.Ratio    777 non-null    float64 
+ 15  perc.alumni  777 non-null    int64   
+ 16  Expend       777 non-null    int64   
+ 17  Grad.Rate    777 non-null    int64   
+ 18  Elite        777 non-null    category
+dtypes: category(1), float64(1), int64(16), object(1)
+memory usage: 116.2+ KB</code></pre>
+</div>
+</div>
+<p>The whole features pertain to numerical type except for ‘Elite’ and ‘Private’. Note that it is preferred to convert Private to ‘category’ type instead of object in order to avoid potential errors when using this feature in a determined function.</p>
+<div id="10d71413" class="cell" data-execution_count="15">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>college[<span class="st">'Private'</span>]<span class="op">=</span>college[<span class="st">'Private'</span>].astype(<span class="st">'category'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>We define three possible segments for the data set: - ‘Faculty’ : this segment comprises all the features which relate to faculty. This includes features ‘PhD’, ‘Terminal’ and ‘S.F.Ratio’; - ‘Students’: This segment includes the features which interests the students. It includes the following features: ‘Apps’, ‘Accept’, ‘Enroll’, ‘Top10perc’, ‘Top25perc’, ‘F.Undergrad’, ‘P.Undergrad’ and ‘Grad.Rate’; - ‘Finance’ : This segment includes the features which give insight about the business model of the university. It encompasses the following features: ‘Private’, ‘Outstate’, ‘Room.Board’, ‘Books’, ‘Personal’, ‘perc.alumni’ and ‘Expend’.</p>
+<p>A university might be interested in the number of enrolled students every year as the dependent variable. This could be a good indicator of performance about the popularity of the university. We choose to focus univariate analysis from this perspective.</p>
+<p>Our expectations related to Outstate tuition are the following: - The dependent variable msut be related to both Top10per et Top25perc - Attribute F.Undergrad play for sure an important role in the dependent variable prediction. - Attributes Apps and Accept must also be related to Enroll, since potential students will tend to apply more where they could be accepted and the enrollment numbers must then be at high levels. Let’s now check these hypotheses by drawing scatterplots.</p>
+<div id="fd550e15" class="cell" data-execution_count="16">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>pd.plotting.scatter_matrix(college[[<span class="st">'Enroll'</span>,<span class="st">'F.Undergrad'</span>,<span class="st">'Top10perc'</span>,<span class="st">'Top25perc'</span>,<span class="st">'Accept'</span>,</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">'Apps'</span>,<span class="st">'Outstate'</span>]])<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="chapter%202_files/figure-html/cell-17-output-1.png" width="565" height="377" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As expected, Enroll looks positively correlated with Accept, F.Undergrad and Apps. However, the relationships with the other attributes look less evident. We should then focus on those three features as independent variables.</p>
+<div id="9fc0cbde" class="cell" data-execution_count="17">
+<div class="cell-output cell-output-stdout">
+<pre><code>                 Apps    Accept    Enroll  Top10perc  Top25perc  F.Undergrad  \
+Apps         1.000000  0.943451  0.846822   0.338834   0.351640     0.814491   
+Accept       0.943451  1.000000  0.911637   0.192447   0.247476     0.874223   
+Enroll       0.846822  0.911637  1.000000   0.181294   0.226745     0.964640   
+Top10perc    0.338834  0.192447  0.181294   1.000000   0.891995     0.141289   
+Top25perc    0.351640  0.247476  0.226745   0.891995   1.000000     0.199445   
+F.Undergrad  0.814491  0.874223  0.964640   0.141289   0.199445     1.000000   
+P.Undergrad  0.398264  0.441271  0.513069  -0.105356  -0.053577     0.570512   
+Outstate     0.050159 -0.025755 -0.155477   0.562331   0.489394    -0.215742   
+Room.Board   0.164939  0.090899 -0.040232   0.371480   0.331490    -0.068890   
+Books        0.132559  0.113525  0.112711   0.118858   0.115527     0.115550   
+Personal     0.178731  0.200989  0.280929  -0.093316  -0.080810     0.317200   
+PhD          0.390697  0.355758  0.331469   0.531828   0.545862     0.318337   
+Terminal     0.369491  0.337583  0.308274   0.491135   0.524749     0.300019   
+S.F.Ratio    0.095633  0.176229  0.237271  -0.384875  -0.294629     0.279703   
+perc.alumni -0.090226 -0.159990 -0.180794   0.455485   0.417864    -0.229462   
+Expend       0.259592  0.124717  0.064169   0.660913   0.527447     0.018652   
+Grad.Rate    0.146755  0.067313 -0.022341   0.494989   0.477281    -0.078773   
+
+             P.Undergrad  Outstate  Room.Board     Books  Personal       PhD  \
+Apps            0.398264  0.050159    0.164939  0.132559  0.178731  0.390697   
+Accept          0.441271 -0.025755    0.090899  0.113525  0.200989  0.355758   
+Enroll          0.513069 -0.155477   -0.040232  0.112711  0.280929  0.331469   
+Top10perc      -0.105356  0.562331    0.371480  0.118858 -0.093316  0.531828   
+Top25perc      -0.053577  0.489394    0.331490  0.115527 -0.080810  0.545862   
+F.Undergrad     0.570512 -0.215742   -0.068890  0.115550  0.317200  0.318337   
+P.Undergrad     1.000000 -0.253512   -0.061326  0.081200  0.319882  0.149114   
+Outstate       -0.253512  1.000000    0.654256  0.038855 -0.299087  0.382982   
+Room.Board     -0.061326  0.654256    1.000000  0.127963 -0.199428  0.329202   
+Books           0.081200  0.038855    0.127963  1.000000  0.179295  0.026906   
+Personal        0.319882 -0.299087   -0.199428  0.179295  1.000000 -0.010936   
+PhD             0.149114  0.382982    0.329202  0.026906 -0.010936  1.000000   
+Terminal        0.141904  0.407983    0.374540  0.099955 -0.030613  0.849587   
+S.F.Ratio       0.232531 -0.554821   -0.362628 -0.031929  0.136345 -0.130530   
+perc.alumni    -0.280792  0.566262    0.272363 -0.040208 -0.285968  0.249009   
+Expend         -0.083568  0.672779    0.501739  0.112409 -0.097892  0.432762   
+Grad.Rate      -0.257001  0.571290    0.424942  0.001061 -0.269344  0.305038   
+
+             Terminal  S.F.Ratio  perc.alumni    Expend  Grad.Rate  
+Apps         0.369491   0.095633    -0.090226  0.259592   0.146755  
+Accept       0.337583   0.176229    -0.159990  0.124717   0.067313  
+Enroll       0.308274   0.237271    -0.180794  0.064169  -0.022341  
+Top10perc    0.491135  -0.384875     0.455485  0.660913   0.494989  
+Top25perc    0.524749  -0.294629     0.417864  0.527447   0.477281  
+F.Undergrad  0.300019   0.279703    -0.229462  0.018652  -0.078773  
+P.Undergrad  0.141904   0.232531    -0.280792 -0.083568  -0.257001  
+Outstate     0.407983  -0.554821     0.566262  0.672779   0.571290  
+Room.Board   0.374540  -0.362628     0.272363  0.501739   0.424942  
+Books        0.099955  -0.031929    -0.040208  0.112409   0.001061  
+Personal    -0.030613   0.136345    -0.285968 -0.097892  -0.269344  
+PhD          0.849587  -0.130530     0.249009  0.432762   0.305038  
+Terminal     1.000000  -0.160104     0.267130  0.438799   0.289527  
+S.F.Ratio   -0.160104   1.000000    -0.402929 -0.583832  -0.306710  
+perc.alumni  0.267130  -0.402929     1.000000  0.417712   0.490898  
+Expend       0.438799  -0.583832     0.417712  1.000000   0.390343  
+Grad.Rate    0.289527  -0.306710     0.490898  0.390343   1.000000  </code></pre>
+</div>
+</div>
+<p>Both correlation matrix and scatterplots show that ‘Apps’, ‘F.Undergrad’ and ‘Accept’ are twin brothers. We should choose one of them and let it be ‘Accept’. We could also argue that there is a nonlinear relationship between the dependent variable and ‘Outstate’. The same thing could be noticed with ‘Top10perc’.</p>
+<p>Our choice finally lands on ‘Accept’, ‘Outstate’ and ‘Top10perc’ as independent variables.</p>
+<p>Hopefully there are no missing data as we can notice from previous outputs. The data set contains 777 entries and all the features show the same count of inputs.</p>
+<p>Now let’s look for outliars. Unfortunately the process of finding outliers can be tieresome and not adapted to the question instruction. The process intails dectecting potential outliers using univariate, bivariate and multivariate analysis accross the whole data set, then trying to classify each potential outlier and spot the variable or the reasons behind it.<br> Consequently, we assume here that there is no aberrant outlier among all the potential ones. Hence, in order to preserve the generalizability of the population features they must all be retained.</p>
+<p>Instead of searching outliars we check below whether there are inconsistant observations. The inconsistency can be found by comparing the triplet’Apps’, ‘Accept’ and ‘Enroll’ for each observation.<br> In fact, for every university the number of applications should logically be greater than number of accepted students which in turn should be greater than the number of students enrolled.<br> Below we discover that such inconsistencies does not exist in the data set.</p>
+<div id="abfccd8f" class="cell" data-execution_count="18">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>college.loc[<span class="kw">lambda</span> college:college[<span class="st">'Apps'</span>]<span class="op">&lt;</span>college[<span class="st">'Accept'</span>]].count()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<pre><code>Private        0
+Apps           0
+Accept         0
+Enroll         0
+Top10perc      0
+Top25perc      0
+F.Undergrad    0
+P.Undergrad    0
+Outstate       0
+Room.Board     0
+Books          0
+Personal       0
+PhD            0
+Terminal       0
+S.F.Ratio      0
+perc.alumni    0
+Expend         0
+Grad.Rate      0
+dtype: int64</code></pre>
+</div>
+</div>
+<div id="6b9d8460" class="cell" data-execution_count="19">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>college.loc[<span class="kw">lambda</span> college:college[<span class="st">'Accept'</span>]<span class="op">&lt;</span>college[<span class="st">'Enroll'</span>]].count()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<pre><code>Private        0
+Apps           0
+Accept         0
+Enroll         0
+Top10perc      0
+Top25perc      0
+F.Undergrad    0
+P.Undergrad    0
+Outstate       0
+Room.Board     0
+Books          0
+Personal       0
+PhD            0
+Terminal       0
+S.F.Ratio      0
+perc.alumni    0
+Expend         0
+Grad.Rate      0
+dtype: int64</code></pre>
+</div>
+</div>
+<p>Further exploration can be left to the reader. Next steps can include the verfication of normality, homoscedasticity, correlated errors and linearty.<br> The interested reader can find more in the following references: - Data Preparation for Machine Learning Data Cleaning, Feature Selection, and Data Transforms in Python by Jason Brownlee; - Multivariate Data Analysis by Joseph F. Hair et al., 8th edition.</p>
+</section>
+</section>
+<section id="exercise-9" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="exercise-9"><span class="header-section-number">2</span> Exercise 9</h2>
+<div id="2ed135af" class="cell" data-execution_count="20">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>Auto<span class="op">=</span>load_data(<span class="st">'Auto'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="8688ffde" class="cell" data-execution_count="21">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>Auto.columns</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<pre><code>Index(['mpg', 'cylinders', 'displacement', 'horsepower', 'weight',
+       'acceleration', 'year', 'origin'],
+      dtype='object')</code></pre>
+</div>
+</div>
+<div id="5a5e8ed0" class="cell" data-execution_count="22">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> col <span class="kw">in</span> Auto.columns:</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    template <span class="op">=</span> <span class="st">'Column "</span><span class="sc">{0}</span><span class="st">" has </span><span class="sc">{1}</span><span class="st"> missing values'</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(template.<span class="bu">format</span>(col,pd.isnull(Auto[col]).<span class="bu">sum</span>()))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Column "mpg" has 0 missing values
+Column "cylinders" has 0 missing values
+Column "displacement" has 0 missing values
+Column "horsepower" has 0 missing values
+Column "weight" has 0 missing values
+Column "acceleration" has 0 missing values
+Column "year" has 0 missing values
+Column "origin" has 0 missing values</code></pre>
+</div>
+</div>
+<p>There is no missing value in the data set.</p>
+<section id="a-1" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="a-1"><span class="header-section-number">2.1</span> (a)</h3>
+<div id="633ce6a0" class="cell" data-execution_count="23">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>Auto.info()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+Index: 392 entries, chevrolet chevelle malibu to chevy s-10
+Data columns (total 8 columns):
+ #   Column        Non-Null Count  Dtype  
+---  ------        --------------  -----  
+ 0   mpg           392 non-null    float64
+ 1   cylinders     392 non-null    int64  
+ 2   displacement  392 non-null    float64
+ 3   horsepower    392 non-null    int64  
+ 4   weight        392 non-null    int64  
+ 5   acceleration  392 non-null    float64
+ 6   year          392 non-null    int64  
+ 7   origin        392 non-null    int64  
+dtypes: float64(3), int64(5)
+memory usage: 27.6+ KB</code></pre>
+</div>
+</div>
+<p>All predictors are quantitative except for the ‘name’ feature.</p>
+</section>
+<section id="b-and-c" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="b-and-c"><span class="header-section-number">2.2</span> (b) and (c)</h3>
+<div id="615ad1bb" class="cell" data-execution_count="24">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#The method describe() does the job automatically for all quantitative columns</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>Auto.describe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="24">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">mpg</th>
+<th data-quarto-table-cell-role="th">cylinders</th>
+<th data-quarto-table-cell-role="th">displacement</th>
+<th data-quarto-table-cell-role="th">horsepower</th>
+<th data-quarto-table-cell-role="th">weight</th>
+<th data-quarto-table-cell-role="th">acceleration</th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">origin</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">count</th>
+<td>392.000000</td>
+<td>392.000000</td>
+<td>392.000000</td>
+<td>392.000000</td>
+<td>392.000000</td>
+<td>392.000000</td>
+<td>392.000000</td>
+<td>392.000000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">mean</th>
+<td>23.445918</td>
+<td>5.471939</td>
+<td>194.411990</td>
+<td>104.469388</td>
+<td>2977.584184</td>
+<td>15.541327</td>
+<td>75.979592</td>
+<td>1.576531</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">std</th>
+<td>7.805007</td>
+<td>1.705783</td>
+<td>104.644004</td>
+<td>38.491160</td>
+<td>849.402560</td>
+<td>2.758864</td>
+<td>3.683737</td>
+<td>0.805518</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">min</th>
+<td>9.000000</td>
+<td>3.000000</td>
+<td>68.000000</td>
+<td>46.000000</td>
+<td>1613.000000</td>
+<td>8.000000</td>
+<td>70.000000</td>
+<td>1.000000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">25%</th>
+<td>17.000000</td>
+<td>4.000000</td>
+<td>105.000000</td>
+<td>75.000000</td>
+<td>2225.250000</td>
+<td>13.775000</td>
+<td>73.000000</td>
+<td>1.000000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">50%</th>
+<td>22.750000</td>
+<td>4.000000</td>
+<td>151.000000</td>
+<td>93.500000</td>
+<td>2803.500000</td>
+<td>15.500000</td>
+<td>76.000000</td>
+<td>1.000000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">75%</th>
+<td>29.000000</td>
+<td>8.000000</td>
+<td>275.750000</td>
+<td>126.000000</td>
+<td>3614.750000</td>
+<td>17.025000</td>
+<td>79.000000</td>
+<td>2.000000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">max</th>
+<td>46.600000</td>
+<td>8.000000</td>
+<td>455.000000</td>
+<td>230.000000</td>
+<td>5140.000000</td>
+<td>24.800000</td>
+<td>82.000000</td>
+<td>3.000000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="d-1" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="d-1"><span class="header-section-number">2.3</span> (d)</h3>
+<div id="112dea05" class="cell" data-execution_count="25">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>Auto_b<span class="op">=</span>Auto.drop(Auto.index[<span class="dv">10</span>:<span class="dv">85</span>])</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>Auto_b.describe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="25">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">mpg</th>
+<th data-quarto-table-cell-role="th">cylinders</th>
+<th data-quarto-table-cell-role="th">displacement</th>
+<th data-quarto-table-cell-role="th">horsepower</th>
+<th data-quarto-table-cell-role="th">weight</th>
+<th data-quarto-table-cell-role="th">acceleration</th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">origin</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">count</th>
+<td>282.000000</td>
+<td>282.000000</td>
+<td>282.000000</td>
+<td>282.000000</td>
+<td>282.000000</td>
+<td>282.000000</td>
+<td>282.000000</td>
+<td>282.000000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">mean</th>
+<td>25.006028</td>
+<td>5.283688</td>
+<td>180.120567</td>
+<td>99.039007</td>
+<td>2884.939716</td>
+<td>15.713121</td>
+<td>77.482270</td>
+<td>1.631206</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">std</th>
+<td>7.921384</td>
+<td>1.637315</td>
+<td>96.164263</td>
+<td>34.197280</td>
+<td>793.236373</td>
+<td>2.601575</td>
+<td>3.017394</td>
+<td>0.830138</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">min</th>
+<td>11.000000</td>
+<td>3.000000</td>
+<td>68.000000</td>
+<td>46.000000</td>
+<td>1755.000000</td>
+<td>8.500000</td>
+<td>70.000000</td>
+<td>1.000000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">25%</th>
+<td>18.125000</td>
+<td>4.000000</td>
+<td>98.000000</td>
+<td>74.250000</td>
+<td>2188.500000</td>
+<td>14.000000</td>
+<td>75.000000</td>
+<td>1.000000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">50%</th>
+<td>24.500000</td>
+<td>4.000000</td>
+<td>140.000000</td>
+<td>90.000000</td>
+<td>2715.500000</td>
+<td>15.500000</td>
+<td>78.000000</td>
+<td>1.000000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">75%</th>
+<td>31.000000</td>
+<td>6.000000</td>
+<td>250.000000</td>
+<td>112.000000</td>
+<td>3435.250000</td>
+<td>17.275000</td>
+<td>80.000000</td>
+<td>2.000000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">max</th>
+<td>46.600000</td>
+<td>8.000000</td>
+<td>455.000000</td>
+<td>230.000000</td>
+<td>4952.000000</td>
+<td>24.600000</td>
+<td>82.000000</td>
+<td>3.000000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Differences are noticeable between both previous tables.</p>
+</section>
+<section id="e-1" class="level3" data-number="2.4">
+<h3 data-number="2.4" class="anchored" data-anchor-id="e-1"><span class="header-section-number">2.4</span> (e)</h3>
+<div id="9507b65b" class="cell" data-execution_count="26">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>pd.plotting.scatter_matrix(Auto,figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">12</span>))<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="chapter%202_files/figure-html/cell-27-output-1.png" width="969" height="961" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>From the previous scatter plot we can draw the following preliminary conclusions:<br> - While acceleration envokes a normal distribution, both weight and mpg show flat tails like normal distribution and skewness; - The couples (displacement,weight), (horsepower, weight) and (horsepower, displacement) show strong linear relationships; - The couples (mpg,weight), (horsepower, mpg) and (mpg, displacement) show non-linear relationships.</p>
+</section>
+<section id="f-1" class="level3" data-number="2.5">
+<h3 data-number="2.5" class="anchored" data-anchor-id="f-1"><span class="header-section-number">2.5</span> (f)</h3>
+<p>Based on the conclusions of the previous question, we elect the features ‘weight’, ‘horsepower’ and ‘displacement’ as to be predictors of ‘mpg’. Further investigations must be done to find the best model and evaluate whether the interlying relationships are significant.</p>
+</section>
+</section>
+<section id="exercise-10" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="exercise-10"><span class="header-section-number">3</span> Exercise 10</h2>
+<section id="a-2" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="a-2"><span class="header-section-number">3.1</span> (a)</h3>
+<div id="f6f8669c" class="cell" data-execution_count="27">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>Boston<span class="op">=</span>load_data(<span class="st">'Boston'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="b-1" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="b-1"><span class="header-section-number">3.2</span> (b)</h3>
+<div id="75f89ae1" class="cell" data-execution_count="28">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>Boston.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="28">
+<pre><code>(506, 13)</code></pre>
+</div>
+</div>
+<p>The previous instruction shows that Boston data set contains 506 lines and 13 columns.<br> Each row is a town in Boston area. Columns are factors which can influence house prices.</p>
+</section>
+<section id="c-1" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="c-1"><span class="header-section-number">3.3</span> (c)</h3>
+<div id="cbeb1234" class="cell" data-execution_count="29">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>pd.plotting.scatter_matrix(Boston,figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">12</span>))<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="chapter%202_files/figure-html/cell-30-output-1.png" width="967" height="958" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>From the previous scatter plot we can draw the following preliminary conclusions:<br> - While rm and medv probably stem from a normal distribution, features like dis, age, lstat, zn and crim may need transformations to satisfy normality; - The couple (rm, medv) shows a strong linear positive relationship; - The couple (rm,lstat) shows a negative non-linear relationship.</p>
+</section>
+<section id="d-2" class="level3" data-number="3.4">
+<h3 data-number="3.4" class="anchored" data-anchor-id="d-2"><span class="header-section-number">3.4</span> (d)</h3>
+<div id="d6942ba4" class="cell" data-execution_count="30">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>Boston.corrwith(Boston[<span class="st">'crim'</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="30">
+<pre><code>crim       1.000000
+zn        -0.200469
+indus      0.406583
+chas      -0.055892
+nox        0.420972
+rm        -0.219247
+age        0.352734
+dis       -0.379670
+rad        0.625505
+tax        0.582764
+ptratio    0.289946
+lstat      0.455621
+medv      -0.388305
+dtype: float64</code></pre>
+</div>
+</div>
+<p>Most important correlations with ‘crim’ feature are discovered with both ‘rad’ and ‘tax’ features.<br> As per ’rad the adapted visualization is a boxplot, since this predictor take discrete values.</p>
+<div id="38703578" class="cell" data-execution_count="31">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Boxplot of crim by rad</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>Boston.boxplot(<span class="st">'crim'</span>, by<span class="op">=</span><span class="st">'rad'</span>, ax<span class="op">=</span>ax)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="chapter%202_files/figure-html/cell-32-output-1.png" width="660" height="697" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>When the index of accessibility to radial highways is at the max (rad=24), the crime per capita rate is much higher both for median value and range.</p>
+<div id="ca00caf9" class="cell" data-execution_count="32">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Boxplot of crim by tax</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>plt.scatter(Boston[<span class="st">'tax'</span>], Boston[<span class="st">'crim'</span>])<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="chapter%202_files/figure-html/cell-33-output-1.png" width="529" height="337" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="4111f5e8" class="cell" data-execution_count="33">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>Boston[<span class="st">'tax'</span>].iloc[Boston[<span class="st">'crim'</span>].argmax()]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="33">
+<pre><code>666</code></pre>
+</div>
+</div>
+<p>When the taxe rate is high (tax=666) the crime rate per capita reaches the max value as well as the largest range.</p>
+</section>
+<section id="e-2" class="level3" data-number="3.5">
+<h3 data-number="3.5" class="anchored" data-anchor-id="e-2"><span class="header-section-number">3.5</span> (e)</h3>
+<div id="7d4cbbe4" class="cell" data-execution_count="34">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Top ten suburbs with high crime rate</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>Boston.iloc[Boston[<span class="st">'crim'</span>].nlargest(<span class="dv">10</span>).index]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="34">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">crim</th>
+<th data-quarto-table-cell-role="th">zn</th>
+<th data-quarto-table-cell-role="th">indus</th>
+<th data-quarto-table-cell-role="th">chas</th>
+<th data-quarto-table-cell-role="th">nox</th>
+<th data-quarto-table-cell-role="th">rm</th>
+<th data-quarto-table-cell-role="th">age</th>
+<th data-quarto-table-cell-role="th">dis</th>
+<th data-quarto-table-cell-role="th">rad</th>
+<th data-quarto-table-cell-role="th">tax</th>
+<th data-quarto-table-cell-role="th">ptratio</th>
+<th data-quarto-table-cell-role="th">lstat</th>
+<th data-quarto-table-cell-role="th">medv</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">380</th>
+<td>88.9762</td>
+<td>0.0</td>
+<td>18.1</td>
+<td>0</td>
+<td>0.671</td>
+<td>6.968</td>
+<td>91.9</td>
+<td>1.4165</td>
+<td>24</td>
+<td>666</td>
+<td>20.2</td>
+<td>17.21</td>
+<td>10.4</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">418</th>
+<td>73.5341</td>
+<td>0.0</td>
+<td>18.1</td>
+<td>0</td>
+<td>0.679</td>
+<td>5.957</td>
+<td>100.0</td>
+<td>1.8026</td>
+<td>24</td>
+<td>666</td>
+<td>20.2</td>
+<td>20.62</td>
+<td>8.8</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">405</th>
+<td>67.9208</td>
+<td>0.0</td>
+<td>18.1</td>
+<td>0</td>
+<td>0.693</td>
+<td>5.683</td>
+<td>100.0</td>
+<td>1.4254</td>
+<td>24</td>
+<td>666</td>
+<td>20.2</td>
+<td>22.98</td>
+<td>5.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">410</th>
+<td>51.1358</td>
+<td>0.0</td>
+<td>18.1</td>
+<td>0</td>
+<td>0.597</td>
+<td>5.757</td>
+<td>100.0</td>
+<td>1.4130</td>
+<td>24</td>
+<td>666</td>
+<td>20.2</td>
+<td>10.11</td>
+<td>15.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">414</th>
+<td>45.7461</td>
+<td>0.0</td>
+<td>18.1</td>
+<td>0</td>
+<td>0.693</td>
+<td>4.519</td>
+<td>100.0</td>
+<td>1.6582</td>
+<td>24</td>
+<td>666</td>
+<td>20.2</td>
+<td>36.98</td>
+<td>7.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">404</th>
+<td>41.5292</td>
+<td>0.0</td>
+<td>18.1</td>
+<td>0</td>
+<td>0.693</td>
+<td>5.531</td>
+<td>85.4</td>
+<td>1.6074</td>
+<td>24</td>
+<td>666</td>
+<td>20.2</td>
+<td>27.38</td>
+<td>8.5</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">398</th>
+<td>38.3518</td>
+<td>0.0</td>
+<td>18.1</td>
+<td>0</td>
+<td>0.693</td>
+<td>5.453</td>
+<td>100.0</td>
+<td>1.4896</td>
+<td>24</td>
+<td>666</td>
+<td>20.2</td>
+<td>30.59</td>
+<td>5.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">427</th>
+<td>37.6619</td>
+<td>0.0</td>
+<td>18.1</td>
+<td>0</td>
+<td>0.679</td>
+<td>6.202</td>
+<td>78.7</td>
+<td>1.8629</td>
+<td>24</td>
+<td>666</td>
+<td>20.2</td>
+<td>14.52</td>
+<td>10.9</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">413</th>
+<td>28.6558</td>
+<td>0.0</td>
+<td>18.1</td>
+<td>0</td>
+<td>0.597</td>
+<td>5.155</td>
+<td>100.0</td>
+<td>1.5894</td>
+<td>24</td>
+<td>666</td>
+<td>20.2</td>
+<td>20.08</td>
+<td>16.3</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">417</th>
+<td>25.9406</td>
+<td>0.0</td>
+<td>18.1</td>
+<td>0</td>
+<td>0.679</td>
+<td>5.304</td>
+<td>89.1</td>
+<td>1.6475</td>
+<td>24</td>
+<td>666</td>
+<td>20.2</td>
+<td>26.64</td>
+<td>10.4</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>The top 10 suburbs with crime rate all have a taxe rate of 666 and a ptratio of 20.2</p>
+<div id="6c31706f" class="cell" data-execution_count="35">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Top ten suburbs with high tax rate</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>Boston.iloc[Boston[<span class="st">'tax'</span>].nlargest(<span class="dv">10</span>).index]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="35">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">crim</th>
+<th data-quarto-table-cell-role="th">zn</th>
+<th data-quarto-table-cell-role="th">indus</th>
+<th data-quarto-table-cell-role="th">chas</th>
+<th data-quarto-table-cell-role="th">nox</th>
+<th data-quarto-table-cell-role="th">rm</th>
+<th data-quarto-table-cell-role="th">age</th>
+<th data-quarto-table-cell-role="th">dis</th>
+<th data-quarto-table-cell-role="th">rad</th>
+<th data-quarto-table-cell-role="th">tax</th>
+<th data-quarto-table-cell-role="th">ptratio</th>
+<th data-quarto-table-cell-role="th">lstat</th>
+<th data-quarto-table-cell-role="th">medv</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">488</th>
+<td>0.15086</td>
+<td>0.0</td>
+<td>27.74</td>
+<td>0</td>
+<td>0.609</td>
+<td>5.454</td>
+<td>92.7</td>
+<td>1.8209</td>
+<td>4</td>
+<td>711</td>
+<td>20.1</td>
+<td>18.06</td>
+<td>15.2</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">489</th>
+<td>0.18337</td>
+<td>0.0</td>
+<td>27.74</td>
+<td>0</td>
+<td>0.609</td>
+<td>5.414</td>
+<td>98.3</td>
+<td>1.7554</td>
+<td>4</td>
+<td>711</td>
+<td>20.1</td>
+<td>23.97</td>
+<td>7.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">490</th>
+<td>0.20746</td>
+<td>0.0</td>
+<td>27.74</td>
+<td>0</td>
+<td>0.609</td>
+<td>5.093</td>
+<td>98.0</td>
+<td>1.8226</td>
+<td>4</td>
+<td>711</td>
+<td>20.1</td>
+<td>29.68</td>
+<td>8.1</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">491</th>
+<td>0.10574</td>
+<td>0.0</td>
+<td>27.74</td>
+<td>0</td>
+<td>0.609</td>
+<td>5.983</td>
+<td>98.8</td>
+<td>1.8681</td>
+<td>4</td>
+<td>711</td>
+<td>20.1</td>
+<td>18.07</td>
+<td>13.6</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">492</th>
+<td>0.11132</td>
+<td>0.0</td>
+<td>27.74</td>
+<td>0</td>
+<td>0.609</td>
+<td>5.983</td>
+<td>83.5</td>
+<td>2.1099</td>
+<td>4</td>
+<td>711</td>
+<td>20.1</td>
+<td>13.35</td>
+<td>20.1</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">356</th>
+<td>8.98296</td>
+<td>0.0</td>
+<td>18.10</td>
+<td>1</td>
+<td>0.770</td>
+<td>6.212</td>
+<td>97.4</td>
+<td>2.1222</td>
+<td>24</td>
+<td>666</td>
+<td>20.2</td>
+<td>17.60</td>
+<td>17.8</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">357</th>
+<td>3.84970</td>
+<td>0.0</td>
+<td>18.10</td>
+<td>1</td>
+<td>0.770</td>
+<td>6.395</td>
+<td>91.0</td>
+<td>2.5052</td>
+<td>24</td>
+<td>666</td>
+<td>20.2</td>
+<td>13.27</td>
+<td>21.7</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">358</th>
+<td>5.20177</td>
+<td>0.0</td>
+<td>18.10</td>
+<td>1</td>
+<td>0.770</td>
+<td>6.127</td>
+<td>83.4</td>
+<td>2.7227</td>
+<td>24</td>
+<td>666</td>
+<td>20.2</td>
+<td>11.48</td>
+<td>22.7</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">359</th>
+<td>4.26131</td>
+<td>0.0</td>
+<td>18.10</td>
+<td>0</td>
+<td>0.770</td>
+<td>6.112</td>
+<td>81.3</td>
+<td>2.5091</td>
+<td>24</td>
+<td>666</td>
+<td>20.2</td>
+<td>12.67</td>
+<td>22.6</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">360</th>
+<td>4.54192</td>
+<td>0.0</td>
+<td>18.10</td>
+<td>0</td>
+<td>0.770</td>
+<td>6.398</td>
+<td>88.0</td>
+<td>2.5182</td>
+<td>24</td>
+<td>666</td>
+<td>20.2</td>
+<td>7.79</td>
+<td>25.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>The top 10 suburbs with tax rate all have a particularly high ptratio between 20.1 and 20.2</p>
+<div id="6e7dcbc1" class="cell" data-execution_count="36">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Top ten suburbs with high tax rate</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>Boston.iloc[Boston[<span class="st">'ptratio'</span>].nlargest(<span class="dv">10</span>).index]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="36">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">crim</th>
+<th data-quarto-table-cell-role="th">zn</th>
+<th data-quarto-table-cell-role="th">indus</th>
+<th data-quarto-table-cell-role="th">chas</th>
+<th data-quarto-table-cell-role="th">nox</th>
+<th data-quarto-table-cell-role="th">rm</th>
+<th data-quarto-table-cell-role="th">age</th>
+<th data-quarto-table-cell-role="th">dis</th>
+<th data-quarto-table-cell-role="th">rad</th>
+<th data-quarto-table-cell-role="th">tax</th>
+<th data-quarto-table-cell-role="th">ptratio</th>
+<th data-quarto-table-cell-role="th">lstat</th>
+<th data-quarto-table-cell-role="th">medv</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">354</th>
+<td>0.04301</td>
+<td>80.0</td>
+<td>1.91</td>
+<td>0</td>
+<td>0.413</td>
+<td>5.663</td>
+<td>21.9</td>
+<td>10.5857</td>
+<td>4</td>
+<td>334</td>
+<td>22.0</td>
+<td>8.05</td>
+<td>18.2</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">355</th>
+<td>0.10659</td>
+<td>80.0</td>
+<td>1.91</td>
+<td>0</td>
+<td>0.413</td>
+<td>5.936</td>
+<td>19.5</td>
+<td>10.5857</td>
+<td>4</td>
+<td>334</td>
+<td>22.0</td>
+<td>5.57</td>
+<td>20.6</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">127</th>
+<td>0.25915</td>
+<td>0.0</td>
+<td>21.89</td>
+<td>0</td>
+<td>0.624</td>
+<td>5.693</td>
+<td>96.0</td>
+<td>1.7883</td>
+<td>4</td>
+<td>437</td>
+<td>21.2</td>
+<td>17.19</td>
+<td>16.2</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">128</th>
+<td>0.32543</td>
+<td>0.0</td>
+<td>21.89</td>
+<td>0</td>
+<td>0.624</td>
+<td>6.431</td>
+<td>98.8</td>
+<td>1.8125</td>
+<td>4</td>
+<td>437</td>
+<td>21.2</td>
+<td>15.39</td>
+<td>18.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">129</th>
+<td>0.88125</td>
+<td>0.0</td>
+<td>21.89</td>
+<td>0</td>
+<td>0.624</td>
+<td>5.637</td>
+<td>94.7</td>
+<td>1.9799</td>
+<td>4</td>
+<td>437</td>
+<td>21.2</td>
+<td>18.34</td>
+<td>14.3</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">130</th>
+<td>0.34006</td>
+<td>0.0</td>
+<td>21.89</td>
+<td>0</td>
+<td>0.624</td>
+<td>6.458</td>
+<td>98.9</td>
+<td>2.1185</td>
+<td>4</td>
+<td>437</td>
+<td>21.2</td>
+<td>12.60</td>
+<td>19.2</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">131</th>
+<td>1.19294</td>
+<td>0.0</td>
+<td>21.89</td>
+<td>0</td>
+<td>0.624</td>
+<td>6.326</td>
+<td>97.7</td>
+<td>2.2710</td>
+<td>4</td>
+<td>437</td>
+<td>21.2</td>
+<td>12.26</td>
+<td>19.6</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">132</th>
+<td>0.59005</td>
+<td>0.0</td>
+<td>21.89</td>
+<td>0</td>
+<td>0.624</td>
+<td>6.372</td>
+<td>97.9</td>
+<td>2.3274</td>
+<td>4</td>
+<td>437</td>
+<td>21.2</td>
+<td>11.12</td>
+<td>23.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">133</th>
+<td>0.32982</td>
+<td>0.0</td>
+<td>21.89</td>
+<td>0</td>
+<td>0.624</td>
+<td>5.822</td>
+<td>95.4</td>
+<td>2.4699</td>
+<td>4</td>
+<td>437</td>
+<td>21.2</td>
+<td>15.03</td>
+<td>18.4</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">134</th>
+<td>0.97617</td>
+<td>0.0</td>
+<td>21.89</td>
+<td>0</td>
+<td>0.624</td>
+<td>5.757</td>
+<td>98.4</td>
+<td>2.3460</td>
+<td>4</td>
+<td>437</td>
+<td>21.2</td>
+<td>17.31</td>
+<td>15.6</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>The top 10 suburbs with ptration have a low rates far away below the max value of 88.97%.</p>
+</section>
+<section id="f-2" class="level3" data-number="3.6">
+<h3 data-number="3.6" class="anchored" data-anchor-id="f-2"><span class="header-section-number">3.6</span> (f)</h3>
+<div id="58cb9fc3" class="cell" data-execution_count="37">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The value of chas is 1 1 if the suburb tracts bounds river</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>Boston[<span class="st">'chas'</span>].value_counts()[<span class="dv">1</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="37">
+<pre><code>35</code></pre>
+</div>
+</div>
+<p>There are 35 suburbs which bound the Charles river</p>
+</section>
+<section id="g-1" class="level3" data-number="3.7">
+<h3 data-number="3.7" class="anchored" data-anchor-id="g-1"><span class="header-section-number">3.7</span> (g)</h3>
+<div id="f59aaad7" class="cell" data-execution_count="38">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>Boston[<span class="st">'ptratio'</span>].median()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="38">
+<pre><code>19.05</code></pre>
+</div>
+</div>
+</section>
+<section id="h-1" class="level3" data-number="3.8">
+<h3 data-number="3.8" class="anchored" data-anchor-id="h-1"><span class="header-section-number">3.8</span> (h)</h3>
+<div id="5c629ad7" class="cell" data-execution_count="39">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>Boston[<span class="st">'medv'</span>].argmin()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="39">
+<pre><code>398</code></pre>
+</div>
+</div>
+<div id="e943ecaa" class="cell" data-execution_count="40">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>Boston.loc[<span class="dv">398</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="40">
+<pre><code>crim        38.3518
+zn           0.0000
+indus       18.1000
+chas         0.0000
+nox          0.6930
+rm           5.4530
+age        100.0000
+dis          1.4896
+rad         24.0000
+tax        666.0000
+ptratio     20.2000
+lstat       30.5900
+medv         5.0000
+Name: 398, dtype: float64</code></pre>
+</div>
+</div>
+<div id="3f6d6868" class="cell" data-execution_count="41">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>Boston.describe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="41">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">crim</th>
+<th data-quarto-table-cell-role="th">zn</th>
+<th data-quarto-table-cell-role="th">indus</th>
+<th data-quarto-table-cell-role="th">chas</th>
+<th data-quarto-table-cell-role="th">nox</th>
+<th data-quarto-table-cell-role="th">rm</th>
+<th data-quarto-table-cell-role="th">age</th>
+<th data-quarto-table-cell-role="th">dis</th>
+<th data-quarto-table-cell-role="th">rad</th>
+<th data-quarto-table-cell-role="th">tax</th>
+<th data-quarto-table-cell-role="th">ptratio</th>
+<th data-quarto-table-cell-role="th">lstat</th>
+<th data-quarto-table-cell-role="th">medv</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">count</th>
+<td>506.000000</td>
+<td>506.000000</td>
+<td>506.000000</td>
+<td>506.000000</td>
+<td>506.000000</td>
+<td>506.000000</td>
+<td>506.000000</td>
+<td>506.000000</td>
+<td>506.000000</td>
+<td>506.000000</td>
+<td>506.000000</td>
+<td>506.000000</td>
+<td>506.000000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">mean</th>
+<td>3.613524</td>
+<td>11.363636</td>
+<td>11.136779</td>
+<td>0.069170</td>
+<td>0.554695</td>
+<td>6.284634</td>
+<td>68.574901</td>
+<td>3.795043</td>
+<td>9.549407</td>
+<td>408.237154</td>
+<td>18.455534</td>
+<td>12.653063</td>
+<td>22.532806</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">std</th>
+<td>8.601545</td>
+<td>23.322453</td>
+<td>6.860353</td>
+<td>0.253994</td>
+<td>0.115878</td>
+<td>0.702617</td>
+<td>28.148861</td>
+<td>2.105710</td>
+<td>8.707259</td>
+<td>168.537116</td>
+<td>2.164946</td>
+<td>7.141062</td>
+<td>9.197104</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">min</th>
+<td>0.006320</td>
+<td>0.000000</td>
+<td>0.460000</td>
+<td>0.000000</td>
+<td>0.385000</td>
+<td>3.561000</td>
+<td>2.900000</td>
+<td>1.129600</td>
+<td>1.000000</td>
+<td>187.000000</td>
+<td>12.600000</td>
+<td>1.730000</td>
+<td>5.000000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">25%</th>
+<td>0.082045</td>
+<td>0.000000</td>
+<td>5.190000</td>
+<td>0.000000</td>
+<td>0.449000</td>
+<td>5.885500</td>
+<td>45.025000</td>
+<td>2.100175</td>
+<td>4.000000</td>
+<td>279.000000</td>
+<td>17.400000</td>
+<td>6.950000</td>
+<td>17.025000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">50%</th>
+<td>0.256510</td>
+<td>0.000000</td>
+<td>9.690000</td>
+<td>0.000000</td>
+<td>0.538000</td>
+<td>6.208500</td>
+<td>77.500000</td>
+<td>3.207450</td>
+<td>5.000000</td>
+<td>330.000000</td>
+<td>19.050000</td>
+<td>11.360000</td>
+<td>21.200000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">75%</th>
+<td>3.677083</td>
+<td>12.500000</td>
+<td>18.100000</td>
+<td>0.000000</td>
+<td>0.624000</td>
+<td>6.623500</td>
+<td>94.075000</td>
+<td>5.188425</td>
+<td>24.000000</td>
+<td>666.000000</td>
+<td>20.200000</td>
+<td>16.955000</td>
+<td>25.000000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">max</th>
+<td>88.976200</td>
+<td>100.000000</td>
+<td>27.740000</td>
+<td>1.000000</td>
+<td>0.871000</td>
+<td>8.780000</td>
+<td>100.000000</td>
+<td>12.126500</td>
+<td>24.000000</td>
+<td>711.000000</td>
+<td>22.000000</td>
+<td>37.970000</td>
+<td>50.000000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>The suburb no 398 has the lowest median value of owner occupied homes.<br> As far as this suburb is concerned, the other predictors are located in the following quantiles: - Above 75% quantile we find crim, indus, nox, age, rad, tax, ptratio and lstat. Particularly, age, rad and ptratio attend their max values; - Below 25% quantile we find zn, rm, dis and medv. Particularly, both medv and zn attend their min value.</p>
+</section>
+<section id="i" class="level3" data-number="3.9">
+<h3 data-number="3.9" class="anchored" data-anchor-id="i"><span class="header-section-number">3.9</span> (i)</h3>
+<div id="7fee9597" class="cell" data-execution_count="42">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co">#More than average of 7 rooms per dwelling</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(Boston[Boston[<span class="st">'rm'</span>]<span class="op">&gt;</span><span class="dv">7</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="42">
+<pre><code>64</code></pre>
+</div>
+</div>
+<div id="fa6fdc66" class="cell" data-execution_count="43">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co">#More than average of 8 rooms per dwelling</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(Boston[Boston[<span class="st">'rm'</span>]<span class="op">&gt;</span><span class="dv">8</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="43">
+<pre><code>13</code></pre>
+</div>
+</div>
+<div id="0e811f98" class="cell" data-execution_count="44">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>Boston[Boston[<span class="st">'rm'</span>]<span class="op">&gt;</span><span class="dv">8</span>].describe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="44">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">crim</th>
+<th data-quarto-table-cell-role="th">zn</th>
+<th data-quarto-table-cell-role="th">indus</th>
+<th data-quarto-table-cell-role="th">chas</th>
+<th data-quarto-table-cell-role="th">nox</th>
+<th data-quarto-table-cell-role="th">rm</th>
+<th data-quarto-table-cell-role="th">age</th>
+<th data-quarto-table-cell-role="th">dis</th>
+<th data-quarto-table-cell-role="th">rad</th>
+<th data-quarto-table-cell-role="th">tax</th>
+<th data-quarto-table-cell-role="th">ptratio</th>
+<th data-quarto-table-cell-role="th">lstat</th>
+<th data-quarto-table-cell-role="th">medv</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">count</th>
+<td>13.000000</td>
+<td>13.000000</td>
+<td>13.000000</td>
+<td>13.000000</td>
+<td>13.000000</td>
+<td>13.000000</td>
+<td>13.000000</td>
+<td>13.000000</td>
+<td>13.000000</td>
+<td>13.000000</td>
+<td>13.000000</td>
+<td>13.000000</td>
+<td>13.000000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">mean</th>
+<td>0.718795</td>
+<td>13.615385</td>
+<td>7.078462</td>
+<td>0.153846</td>
+<td>0.539238</td>
+<td>8.348538</td>
+<td>71.538462</td>
+<td>3.430192</td>
+<td>7.461538</td>
+<td>325.076923</td>
+<td>16.361538</td>
+<td>4.310000</td>
+<td>44.200000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">std</th>
+<td>0.901640</td>
+<td>26.298094</td>
+<td>5.392767</td>
+<td>0.375534</td>
+<td>0.092352</td>
+<td>0.251261</td>
+<td>24.608723</td>
+<td>1.883955</td>
+<td>5.332532</td>
+<td>110.971063</td>
+<td>2.410580</td>
+<td>1.373566</td>
+<td>8.092383</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">min</th>
+<td>0.020090</td>
+<td>0.000000</td>
+<td>2.680000</td>
+<td>0.000000</td>
+<td>0.416100</td>
+<td>8.034000</td>
+<td>8.400000</td>
+<td>1.801000</td>
+<td>2.000000</td>
+<td>224.000000</td>
+<td>13.000000</td>
+<td>2.470000</td>
+<td>21.900000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">25%</th>
+<td>0.331470</td>
+<td>0.000000</td>
+<td>3.970000</td>
+<td>0.000000</td>
+<td>0.504000</td>
+<td>8.247000</td>
+<td>70.400000</td>
+<td>2.288500</td>
+<td>5.000000</td>
+<td>264.000000</td>
+<td>14.700000</td>
+<td>3.320000</td>
+<td>41.700000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">50%</th>
+<td>0.520140</td>
+<td>0.000000</td>
+<td>6.200000</td>
+<td>0.000000</td>
+<td>0.507000</td>
+<td>8.297000</td>
+<td>78.300000</td>
+<td>2.894400</td>
+<td>7.000000</td>
+<td>307.000000</td>
+<td>17.400000</td>
+<td>4.140000</td>
+<td>48.300000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">75%</th>
+<td>0.578340</td>
+<td>20.000000</td>
+<td>6.200000</td>
+<td>0.000000</td>
+<td>0.605000</td>
+<td>8.398000</td>
+<td>86.500000</td>
+<td>3.651900</td>
+<td>8.000000</td>
+<td>307.000000</td>
+<td>17.400000</td>
+<td>5.120000</td>
+<td>50.000000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">max</th>
+<td>3.474280</td>
+<td>95.000000</td>
+<td>19.580000</td>
+<td>1.000000</td>
+<td>0.718000</td>
+<td>8.780000</td>
+<td>93.900000</td>
+<td>8.906700</td>
+<td>24.000000</td>
+<td>666.000000</td>
+<td>20.200000</td>
+<td>7.440000</td>
+<td>50.000000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>There are 64 and 13 suburbs which have more than 7 and 8 rooms per dewilling respectively.<br> Furthermore, the average of crime rate for the 13 suburbs is lower than crime rate for the whole population. However, median value of owner-occupied homes is larger as expected.</p>
+<!-- -->
+
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb61" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Statistical Learning Analysis Report"</span></span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Chapter 2: ISLR2 Exercise Solutions"</span></span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Shad Ali Shah"</span></span>
+<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> today</span></span>
+<span id="cb61-6"><a href="#cb61-6" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb61-7"><a href="#cb61-7" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb61-8"><a href="#cb61-8" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb61-9"><a href="#cb61-9" aria-hidden="true" tabindex="-1"></a><span class="co">    toc-depth: 2</span></span>
+<span id="cb61-10"><a href="#cb61-10" aria-hidden="true" tabindex="-1"></a><span class="co">    toc-location: left</span></span>
+<span id="cb61-11"><a href="#cb61-11" aria-hidden="true" tabindex="-1"></a><span class="co">    number-sections: true</span></span>
+<span id="cb61-12"><a href="#cb61-12" aria-hidden="true" tabindex="-1"></a><span class="co">    number-depth: 3</span></span>
+<span id="cb61-13"><a href="#cb61-13" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
+<span id="cb61-14"><a href="#cb61-14" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb61-15"><a href="#cb61-15" aria-hidden="true" tabindex="-1"></a><span class="co">    code-summary: "Show code"</span></span>
+<span id="cb61-16"><a href="#cb61-16" aria-hidden="true" tabindex="-1"></a><span class="co">    theme: cosmo</span></span>
+<span id="cb61-17"><a href="#cb61-17" aria-hidden="true" tabindex="-1"></a><span class="co">    colorlinks: true</span></span>
+<span id="cb61-18"><a href="#cb61-18" aria-hidden="true" tabindex="-1"></a><span class="co">    link-citations: true</span></span>
+<span id="cb61-19"><a href="#cb61-19" aria-hidden="true" tabindex="-1"></a><span class="co">    df-print: kable</span></span>
+<span id="cb61-20"><a href="#cb61-20" aria-hidden="true" tabindex="-1"></a><span class="co">    fig-cap-location: bottom</span></span>
+<span id="cb61-21"><a href="#cb61-21" aria-hidden="true" tabindex="-1"></a><span class="co">    tbl-cap-location: top</span></span>
+<span id="cb61-22"><a href="#cb61-22" aria-hidden="true" tabindex="-1"></a><span class="co">    crossref:</span></span>
+<span id="cb61-23"><a href="#cb61-23" aria-hidden="true" tabindex="-1"></a><span class="co">      fig-title: "Figure"</span></span>
+<span id="cb61-24"><a href="#cb61-24" aria-hidden="true" tabindex="-1"></a><span class="co">      tbl-title: "Table"</span></span>
+<span id="cb61-25"><a href="#cb61-25" aria-hidden="true" tabindex="-1"></a><span class="co">      fig-prefix: "Fig."</span></span>
+<span id="cb61-26"><a href="#cb61-26" aria-hidden="true" tabindex="-1"></a><span class="co">      tbl-prefix: "Table"</span></span>
+<span id="cb61-27"><a href="#cb61-27" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
+<span id="cb61-28"><a href="#cb61-28" aria-hidden="true" tabindex="-1"></a><span class="co">  echo: true</span></span>
+<span id="cb61-29"><a href="#cb61-29" aria-hidden="true" tabindex="-1"></a><span class="co">  warning: false</span></span>
+<span id="cb61-30"><a href="#cb61-30" aria-hidden="true" tabindex="-1"></a><span class="co">  message: false</span></span>
+<span id="cb61-31"><a href="#cb61-31" aria-hidden="true" tabindex="-1"></a><span class="co">  error: true</span></span>
+<span id="cb61-32"><a href="#cb61-32" aria-hidden="true" tabindex="-1"></a><span class="co">  cache: false</span></span>
+<span id="cb61-33"><a href="#cb61-33" aria-hidden="true" tabindex="-1"></a><span class="co">  keep-going: true</span></span>
+<span id="cb61-34"><a href="#cb61-34" aria-hidden="true" tabindex="-1"></a><span class="co">  fig-width: 6.5</span></span>
+<span id="cb61-35"><a href="#cb61-35" aria-hidden="true" tabindex="-1"></a><span class="co">  fig-height: 4</span></span>
+<span id="cb61-36"><a href="#cb61-36" aria-hidden="true" tabindex="-1"></a><span class="an">jupyter:</span><span class="co"> python3</span></span>
+<span id="cb61-37"><a href="#cb61-37" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb61-38"><a href="#cb61-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-39"><a href="#cb61-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-40"><a href="#cb61-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-41"><a href="#cb61-41" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercise 8</span></span>
+<span id="cb61-42"><a href="#cb61-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-45"><a href="#cb61-45" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-46"><a href="#cb61-46" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb61-47"><a href="#cb61-47" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb61-48"><a href="#cb61-48" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb61-49"><a href="#cb61-49" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ISLP <span class="im">import</span> load_data</span>
+<span id="cb61-50"><a href="#cb61-50" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.pyplot <span class="im">import</span> subplots</span>
+<span id="cb61-51"><a href="#cb61-51" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-52"><a href="#cb61-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-53"><a href="#cb61-53" aria-hidden="true" tabindex="-1"></a><span class="fu">### (a)</span></span>
+<span id="cb61-54"><a href="#cb61-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-57"><a href="#cb61-57" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-58"><a href="#cb61-58" aria-hidden="true" tabindex="-1"></a>college<span class="op">=</span>pd.read_csv(<span class="st">'College.csv'</span>)</span>
+<span id="cb61-59"><a href="#cb61-59" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-60"><a href="#cb61-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-61"><a href="#cb61-61" aria-hidden="true" tabindex="-1"></a><span class="fu">### (b)</span></span>
+<span id="cb61-62"><a href="#cb61-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-65"><a href="#cb61-65" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-66"><a href="#cb61-66" aria-hidden="true" tabindex="-1"></a>college.head()</span>
+<span id="cb61-67"><a href="#cb61-67" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-68"><a href="#cb61-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-71"><a href="#cb61-71" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-72"><a href="#cb61-72" aria-hidden="true" tabindex="-1"></a>college2 <span class="op">=</span> pd.read_csv(<span class="st">'College.csv'</span>, index_col <span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb61-73"><a href="#cb61-73" aria-hidden="true" tabindex="-1"></a>college3 <span class="op">=</span> college.rename({<span class="st">'Unnamed: 0'</span>: <span class="st">'College'</span>},axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb61-74"><a href="#cb61-74" aria-hidden="true" tabindex="-1"></a>college3 <span class="op">=</span> college3.set_index(<span class="st">'College'</span>)</span>
+<span id="cb61-75"><a href="#cb61-75" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-76"><a href="#cb61-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-79"><a href="#cb61-79" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-80"><a href="#cb61-80" aria-hidden="true" tabindex="-1"></a>college<span class="op">=</span>college3</span>
+<span id="cb61-81"><a href="#cb61-81" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-82"><a href="#cb61-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-85"><a href="#cb61-85" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-86"><a href="#cb61-86" aria-hidden="true" tabindex="-1"></a>college.head()</span>
+<span id="cb61-87"><a href="#cb61-87" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-88"><a href="#cb61-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-89"><a href="#cb61-89" aria-hidden="true" tabindex="-1"></a><span class="fu">### (c)</span></span>
+<span id="cb61-90"><a href="#cb61-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-93"><a href="#cb61-93" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-94"><a href="#cb61-94" aria-hidden="true" tabindex="-1"></a>college.describe()</span>
+<span id="cb61-95"><a href="#cb61-95" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-96"><a href="#cb61-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-97"><a href="#cb61-97" aria-hidden="true" tabindex="-1"></a><span class="fu">### (d)</span></span>
+<span id="cb61-98"><a href="#cb61-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-101"><a href="#cb61-101" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-102"><a href="#cb61-102" aria-hidden="true" tabindex="-1"></a>pd.plotting.scatter_matrix(college[[<span class="st">'Top10perc'</span>,<span class="st">'Apps'</span>,<span class="st">'Enroll'</span>]])<span class="op">;</span></span>
+<span id="cb61-103"><a href="#cb61-103" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-104"><a href="#cb61-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-105"><a href="#cb61-105" aria-hidden="true" tabindex="-1"></a><span class="fu">### (e)</span></span>
+<span id="cb61-106"><a href="#cb61-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-109"><a href="#cb61-109" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-110"><a href="#cb61-110" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
+<span id="cb61-111"><a href="#cb61-111" aria-hidden="true" tabindex="-1"></a>college.boxplot(<span class="st">'Outstate'</span>, by<span class="op">=</span><span class="st">'Private'</span>, ax<span class="op">=</span>ax)<span class="op">;</span></span>
+<span id="cb61-112"><a href="#cb61-112" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-113"><a href="#cb61-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-114"><a href="#cb61-114" aria-hidden="true" tabindex="-1"></a><span class="fu">### (f)</span></span>
+<span id="cb61-115"><a href="#cb61-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-118"><a href="#cb61-118" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-119"><a href="#cb61-119" aria-hidden="true" tabindex="-1"></a>college[<span class="st">'Elite'</span>] <span class="op">=</span> pd.cut(college[<span class="st">'Top10perc'</span>],bins<span class="op">=</span><span class="dv">2</span>,labels<span class="op">=</span>[<span class="st">'No'</span>,<span class="st">'Yes'</span>])</span>
+<span id="cb61-120"><a href="#cb61-120" aria-hidden="true" tabindex="-1"></a><span class="co">#The exact formula provided by the exercise instructions did not work. In fact many observations </span></span>
+<span id="cb61-121"><a href="#cb61-121" aria-hidden="true" tabindex="-1"></a><span class="co">#remained void.</span></span>
+<span id="cb61-122"><a href="#cb61-122" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-123"><a href="#cb61-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-126"><a href="#cb61-126" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-127"><a href="#cb61-127" aria-hidden="true" tabindex="-1"></a>college.value_counts(college[<span class="st">'Elite'</span>])</span>
+<span id="cb61-128"><a href="#cb61-128" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-129"><a href="#cb61-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-132"><a href="#cb61-132" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-133"><a href="#cb61-133" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
+<span id="cb61-134"><a href="#cb61-134" aria-hidden="true" tabindex="-1"></a>college.boxplot(<span class="st">'Outstate'</span>, by<span class="op">=</span><span class="st">'Elite'</span>, ax<span class="op">=</span>ax)<span class="op">;</span></span>
+<span id="cb61-135"><a href="#cb61-135" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-136"><a href="#cb61-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-137"><a href="#cb61-137" aria-hidden="true" tabindex="-1"></a><span class="fu">### (g)</span></span>
+<span id="cb61-138"><a href="#cb61-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-141"><a href="#cb61-141" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-142"><a href="#cb61-142" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span>plt.subplots(nrows<span class="op">=</span><span class="dv">2</span>,ncols<span class="op">=</span> <span class="dv">2</span>,figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">12</span>))</span>
+<span id="cb61-143"><a href="#cb61-143" aria-hidden="true" tabindex="-1"></a>college[<span class="st">'Apps'</span>].plot.hist(ax<span class="op">=</span>axes[<span class="dv">0</span>,<span class="dv">0</span>])</span>
+<span id="cb61-144"><a href="#cb61-144" aria-hidden="true" tabindex="-1"></a>college[<span class="st">'Accept'</span>].plot.hist(ax<span class="op">=</span>axes[<span class="dv">0</span>,<span class="dv">1</span>])</span>
+<span id="cb61-145"><a href="#cb61-145" aria-hidden="true" tabindex="-1"></a>college[<span class="st">'Enroll'</span>].plot.hist(ax<span class="op">=</span>axes[<span class="dv">1</span>,<span class="dv">0</span>])</span>
+<span id="cb61-146"><a href="#cb61-146" aria-hidden="true" tabindex="-1"></a>college[<span class="st">'Outstate'</span>].plot.hist(ax<span class="op">=</span>axes[<span class="dv">1</span>,<span class="dv">1</span>])<span class="op">;</span></span>
+<span id="cb61-147"><a href="#cb61-147" aria-hidden="true" tabindex="-1"></a><span class="co"># We can create bins for each of the plotted columns</span></span>
+<span id="cb61-148"><a href="#cb61-148" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-149"><a href="#cb61-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-150"><a href="#cb61-150" aria-hidden="true" tabindex="-1"></a><span class="fu">### (h)</span></span>
+<span id="cb61-151"><a href="#cb61-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-152"><a href="#cb61-152" aria-hidden="true" tabindex="-1"></a>First off, let's explore the type of each of the data set features. We can use the info() fiunction for this.</span>
+<span id="cb61-153"><a href="#cb61-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-156"><a href="#cb61-156" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-157"><a href="#cb61-157" aria-hidden="true" tabindex="-1"></a>college.info()</span>
+<span id="cb61-158"><a href="#cb61-158" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-159"><a href="#cb61-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-160"><a href="#cb61-160" aria-hidden="true" tabindex="-1"></a>The whole features pertain to numerical type except for 'Elite' and 'Private'. Note that it is preferred to convert Private to 'category' type instead of object in order to avoid potential errors when using this feature in a determined function.</span>
+<span id="cb61-161"><a href="#cb61-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-164"><a href="#cb61-164" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-165"><a href="#cb61-165" aria-hidden="true" tabindex="-1"></a>college[<span class="st">'Private'</span>]<span class="op">=</span>college[<span class="st">'Private'</span>].astype(<span class="st">'category'</span>)</span>
+<span id="cb61-166"><a href="#cb61-166" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-167"><a href="#cb61-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-168"><a href="#cb61-168" aria-hidden="true" tabindex="-1"></a>We define three possible segments for the data set:</span>
+<span id="cb61-169"><a href="#cb61-169" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>'Faculty' : this segment comprises all the features which relate to faculty. This includes features 'PhD', 'Terminal' and 'S.F.Ratio';</span>
+<span id="cb61-170"><a href="#cb61-170" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>'Students': This segment includes the features which interests the students. It includes the following features: 'Apps', 'Accept', 'Enroll', 'Top10perc', 'Top25perc', 'F.Undergrad', 'P.Undergrad' and 'Grad.Rate';</span>
+<span id="cb61-171"><a href="#cb61-171" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>'Finance' : This segment includes the features which give insight about the business model of the university. It encompasses the following features: 'Private', 'Outstate', 'Room.Board', 'Books', 'Personal', 'perc.alumni' and 'Expend'.</span>
+<span id="cb61-172"><a href="#cb61-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-173"><a href="#cb61-173" aria-hidden="true" tabindex="-1"></a>A university might be interested in the number of enrolled students every year as the dependent variable. This could be a good indicator of performance about the popularity of the university.</span>
+<span id="cb61-174"><a href="#cb61-174" aria-hidden="true" tabindex="-1"></a>We choose to focus univariate analysis from this perspective.</span>
+<span id="cb61-175"><a href="#cb61-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-176"><a href="#cb61-176" aria-hidden="true" tabindex="-1"></a>Our expectations related to Outstate tuition are the following:</span>
+<span id="cb61-177"><a href="#cb61-177" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The dependent variable msut be related to both Top10per et Top25perc</span>
+<span id="cb61-178"><a href="#cb61-178" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Attribute F.Undergrad play for sure an important role in the dependent variable prediction. </span>
+<span id="cb61-179"><a href="#cb61-179" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Attributes Apps and Accept must also be related to Enroll, since potential students will tend to apply more where they could be accepted and the enrollment numbers must then be at high levels.</span>
+<span id="cb61-180"><a href="#cb61-180" aria-hidden="true" tabindex="-1"></a>Let's now check these hypotheses by drawing scatterplots.</span>
+<span id="cb61-181"><a href="#cb61-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-184"><a href="#cb61-184" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-185"><a href="#cb61-185" aria-hidden="true" tabindex="-1"></a>pd.plotting.scatter_matrix(college[[<span class="st">'Enroll'</span>,<span class="st">'F.Undergrad'</span>,<span class="st">'Top10perc'</span>,<span class="st">'Top25perc'</span>,<span class="st">'Accept'</span>,</span>
+<span id="cb61-186"><a href="#cb61-186" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">'Apps'</span>,<span class="st">'Outstate'</span>]])<span class="op">;</span></span>
+<span id="cb61-187"><a href="#cb61-187" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-188"><a href="#cb61-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-189"><a href="#cb61-189" aria-hidden="true" tabindex="-1"></a>As expected, Enroll looks positively correlated with Accept, F.Undergrad and Apps. However, the relationships with the other attributes look less evident. </span>
+<span id="cb61-190"><a href="#cb61-190" aria-hidden="true" tabindex="-1"></a>We should then focus on those three features as independent variables.</span>
+<span id="cb61-191"><a href="#cb61-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-194"><a href="#cb61-194" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-195"><a href="#cb61-195" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb61-196"><a href="#cb61-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-197"><a href="#cb61-197" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb61-198"><a href="#cb61-198" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ISLP <span class="im">import</span> load_data</span>
+<span id="cb61-199"><a href="#cb61-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-200"><a href="#cb61-200" aria-hidden="true" tabindex="-1"></a><span class="co"># Load and save the College dataset</span></span>
+<span id="cb61-201"><a href="#cb61-201" aria-hidden="true" tabindex="-1"></a>college_data <span class="op">=</span> load_data(<span class="st">'College'</span>)</span>
+<span id="cb61-202"><a href="#cb61-202" aria-hidden="true" tabindex="-1"></a>college_data.to_csv(<span class="st">'College.csv'</span>)</span>
+<span id="cb61-203"><a href="#cb61-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-204"><a href="#cb61-204" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the dataset</span></span>
+<span id="cb61-205"><a href="#cb61-205" aria-hidden="true" tabindex="-1"></a>college <span class="op">=</span> pd.read_csv(<span class="st">'College.csv'</span>, index_col<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb61-206"><a href="#cb61-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-207"><a href="#cb61-207" aria-hidden="true" tabindex="-1"></a><span class="co"># Select only numeric columns for correlation</span></span>
+<span id="cb61-208"><a href="#cb61-208" aria-hidden="true" tabindex="-1"></a>numeric_cols <span class="op">=</span> college.select_dtypes(include<span class="op">=</span><span class="st">'number'</span>)</span>
+<span id="cb61-209"><a href="#cb61-209" aria-hidden="true" tabindex="-1"></a>correlation_matrix <span class="op">=</span> numeric_cols.corr()</span>
+<span id="cb61-210"><a href="#cb61-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-211"><a href="#cb61-211" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the correlation matrix</span></span>
+<span id="cb61-212"><a href="#cb61-212" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(correlation_matrix)</span>
+<span id="cb61-213"><a href="#cb61-213" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-214"><a href="#cb61-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-215"><a href="#cb61-215" aria-hidden="true" tabindex="-1"></a>Both correlation matrix and scatterplots show that 'Apps', 'F.Undergrad' and 'Accept' are twin brothers. We should choose one of them and let it be 'Accept'. We could also argue that there is a nonlinear relationship between the dependent variable and 'Outstate'. The same thing could be noticed with 'Top10perc'. </span>
+<span id="cb61-216"><a href="#cb61-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-217"><a href="#cb61-217" aria-hidden="true" tabindex="-1"></a>Our choice finally lands on 'Accept', 'Outstate' and 'Top10perc' as independent variables.</span>
+<span id="cb61-218"><a href="#cb61-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-219"><a href="#cb61-219" aria-hidden="true" tabindex="-1"></a>Hopefully there are no missing data as we can notice from previous outputs. The data set contains 777 entries and all the features show the same count of inputs.</span>
+<span id="cb61-220"><a href="#cb61-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-221"><a href="#cb61-221" aria-hidden="true" tabindex="-1"></a>Now let's look for outliars. Unfortunately the process of finding outliers can be tieresome and not adapted to the question instruction. The process intails dectecting potential outliers using univariate, bivariate and multivariate analysis accross the whole data set, then trying to classify each potential outlier and spot the variable or the reasons behind it.<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span></span>
+<span id="cb61-222"><a href="#cb61-222" aria-hidden="true" tabindex="-1"></a>Consequently, we assume here that there is no aberrant outlier among all the potential ones. Hence, in order to preserve the generalizability of the population features they must all be retained.</span>
+<span id="cb61-223"><a href="#cb61-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-224"><a href="#cb61-224" aria-hidden="true" tabindex="-1"></a>Instead of searching outliars we check below whether there are inconsistant observations. The inconsistency can be found by comparing the triplet'Apps', 'Accept' and 'Enroll' for each observation.<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span></span>
+<span id="cb61-225"><a href="#cb61-225" aria-hidden="true" tabindex="-1"></a>In fact, for every university the number of applications should logically be greater than number of accepted students which in turn should be greater than the number of students enrolled.<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span></span>
+<span id="cb61-226"><a href="#cb61-226" aria-hidden="true" tabindex="-1"></a>Below we discover that such inconsistencies does not exist in the data set.</span>
+<span id="cb61-227"><a href="#cb61-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-230"><a href="#cb61-230" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-231"><a href="#cb61-231" aria-hidden="true" tabindex="-1"></a>college.loc[<span class="kw">lambda</span> college:college[<span class="st">'Apps'</span>]<span class="op">&lt;</span>college[<span class="st">'Accept'</span>]].count()</span>
+<span id="cb61-232"><a href="#cb61-232" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-233"><a href="#cb61-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-236"><a href="#cb61-236" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-237"><a href="#cb61-237" aria-hidden="true" tabindex="-1"></a>college.loc[<span class="kw">lambda</span> college:college[<span class="st">'Accept'</span>]<span class="op">&lt;</span>college[<span class="st">'Enroll'</span>]].count()</span>
+<span id="cb61-238"><a href="#cb61-238" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-239"><a href="#cb61-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-240"><a href="#cb61-240" aria-hidden="true" tabindex="-1"></a>Further exploration can be left to the reader. Next steps can include the verfication of normality, homoscedasticity, correlated errors and linearty.<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span> </span>
+<span id="cb61-241"><a href="#cb61-241" aria-hidden="true" tabindex="-1"></a>The interested reader can find more in the following references:</span>
+<span id="cb61-242"><a href="#cb61-242" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Data Preparation for Machine Learning Data Cleaning, Feature Selection, and Data Transforms in Python by Jason Brownlee;</span>
+<span id="cb61-243"><a href="#cb61-243" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Multivariate Data Analysis by Joseph F. Hair et al., 8th edition.</span>
+<span id="cb61-244"><a href="#cb61-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-245"><a href="#cb61-245" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercise 9</span></span>
+<span id="cb61-246"><a href="#cb61-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-249"><a href="#cb61-249" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-250"><a href="#cb61-250" aria-hidden="true" tabindex="-1"></a>Auto<span class="op">=</span>load_data(<span class="st">'Auto'</span>)</span>
+<span id="cb61-251"><a href="#cb61-251" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-252"><a href="#cb61-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-255"><a href="#cb61-255" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-256"><a href="#cb61-256" aria-hidden="true" tabindex="-1"></a>Auto.columns</span>
+<span id="cb61-257"><a href="#cb61-257" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-258"><a href="#cb61-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-261"><a href="#cb61-261" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-262"><a href="#cb61-262" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> col <span class="kw">in</span> Auto.columns:</span>
+<span id="cb61-263"><a href="#cb61-263" aria-hidden="true" tabindex="-1"></a>    template <span class="op">=</span> <span class="st">'Column "</span><span class="sc">{0}</span><span class="st">" has </span><span class="sc">{1}</span><span class="st"> missing values'</span></span>
+<span id="cb61-264"><a href="#cb61-264" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(template.<span class="bu">format</span>(col,pd.isnull(Auto[col]).<span class="bu">sum</span>()))</span>
+<span id="cb61-265"><a href="#cb61-265" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-266"><a href="#cb61-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-267"><a href="#cb61-267" aria-hidden="true" tabindex="-1"></a>There is no missing value in the data set.</span>
+<span id="cb61-268"><a href="#cb61-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-269"><a href="#cb61-269" aria-hidden="true" tabindex="-1"></a><span class="fu">### (a)</span></span>
+<span id="cb61-270"><a href="#cb61-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-273"><a href="#cb61-273" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-274"><a href="#cb61-274" aria-hidden="true" tabindex="-1"></a>Auto.info()</span>
+<span id="cb61-275"><a href="#cb61-275" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-276"><a href="#cb61-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-277"><a href="#cb61-277" aria-hidden="true" tabindex="-1"></a>All predictors are quantitative except for the 'name' feature. </span>
+<span id="cb61-278"><a href="#cb61-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-279"><a href="#cb61-279" aria-hidden="true" tabindex="-1"></a><span class="fu">### (b) and (c)</span></span>
+<span id="cb61-280"><a href="#cb61-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-283"><a href="#cb61-283" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-284"><a href="#cb61-284" aria-hidden="true" tabindex="-1"></a><span class="co">#The method describe() does the job automatically for all quantitative columns</span></span>
+<span id="cb61-285"><a href="#cb61-285" aria-hidden="true" tabindex="-1"></a>Auto.describe()</span>
+<span id="cb61-286"><a href="#cb61-286" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-287"><a href="#cb61-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-288"><a href="#cb61-288" aria-hidden="true" tabindex="-1"></a><span class="fu">### (d)</span></span>
+<span id="cb61-289"><a href="#cb61-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-292"><a href="#cb61-292" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-293"><a href="#cb61-293" aria-hidden="true" tabindex="-1"></a>Auto_b<span class="op">=</span>Auto.drop(Auto.index[<span class="dv">10</span>:<span class="dv">85</span>])</span>
+<span id="cb61-294"><a href="#cb61-294" aria-hidden="true" tabindex="-1"></a>Auto_b.describe()</span>
+<span id="cb61-295"><a href="#cb61-295" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-296"><a href="#cb61-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-297"><a href="#cb61-297" aria-hidden="true" tabindex="-1"></a>Differences are noticeable between both previous tables.</span>
+<span id="cb61-298"><a href="#cb61-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-299"><a href="#cb61-299" aria-hidden="true" tabindex="-1"></a><span class="fu">### (e)</span></span>
+<span id="cb61-300"><a href="#cb61-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-303"><a href="#cb61-303" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-304"><a href="#cb61-304" aria-hidden="true" tabindex="-1"></a>pd.plotting.scatter_matrix(Auto,figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">12</span>))<span class="op">;</span></span>
+<span id="cb61-305"><a href="#cb61-305" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-306"><a href="#cb61-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-307"><a href="#cb61-307" aria-hidden="true" tabindex="-1"></a>From the previous scatter plot we can draw the following preliminary conclusions:<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span></span>
+<span id="cb61-308"><a href="#cb61-308" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>While acceleration envokes a normal distribution, both weight and mpg show flat tails like normal distribution and skewness;</span>
+<span id="cb61-309"><a href="#cb61-309" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The couples (displacement,weight), (horsepower, weight) and (horsepower, displacement) show strong linear relationships;</span>
+<span id="cb61-310"><a href="#cb61-310" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The couples (mpg,weight), (horsepower, mpg) and (mpg, displacement) show non-linear relationships.</span>
+<span id="cb61-311"><a href="#cb61-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-312"><a href="#cb61-312" aria-hidden="true" tabindex="-1"></a><span class="fu">### (f)</span></span>
+<span id="cb61-313"><a href="#cb61-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-314"><a href="#cb61-314" aria-hidden="true" tabindex="-1"></a>Based on the conclusions of the previous question, we elect the features 'weight', 'horsepower' and 'displacement' as to be predictors of 'mpg'. Further investigations must be done to find the best model and evaluate whether the interlying relationships are significant.</span>
+<span id="cb61-315"><a href="#cb61-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-316"><a href="#cb61-316" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercise 10</span></span>
+<span id="cb61-317"><a href="#cb61-317" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-318"><a href="#cb61-318" aria-hidden="true" tabindex="-1"></a><span class="fu">### (a)</span></span>
+<span id="cb61-319"><a href="#cb61-319" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-322"><a href="#cb61-322" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-323"><a href="#cb61-323" aria-hidden="true" tabindex="-1"></a>Boston<span class="op">=</span>load_data(<span class="st">'Boston'</span>)</span>
+<span id="cb61-324"><a href="#cb61-324" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-325"><a href="#cb61-325" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-326"><a href="#cb61-326" aria-hidden="true" tabindex="-1"></a><span class="fu">### (b)</span></span>
+<span id="cb61-327"><a href="#cb61-327" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-330"><a href="#cb61-330" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-331"><a href="#cb61-331" aria-hidden="true" tabindex="-1"></a>Boston.shape</span>
+<span id="cb61-332"><a href="#cb61-332" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-333"><a href="#cb61-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-334"><a href="#cb61-334" aria-hidden="true" tabindex="-1"></a>The previous instruction shows that Boston data set contains 506 lines and 13 columns.<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span></span>
+<span id="cb61-335"><a href="#cb61-335" aria-hidden="true" tabindex="-1"></a>Each row is a town in Boston area. Columns are factors which can influence house prices.</span>
+<span id="cb61-336"><a href="#cb61-336" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-337"><a href="#cb61-337" aria-hidden="true" tabindex="-1"></a><span class="fu">### (c)</span></span>
+<span id="cb61-338"><a href="#cb61-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-341"><a href="#cb61-341" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-342"><a href="#cb61-342" aria-hidden="true" tabindex="-1"></a>pd.plotting.scatter_matrix(Boston,figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">12</span>))<span class="op">;</span></span>
+<span id="cb61-343"><a href="#cb61-343" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-344"><a href="#cb61-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-345"><a href="#cb61-345" aria-hidden="true" tabindex="-1"></a>From the previous scatter plot we can draw the following preliminary conclusions:<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span></span>
+<span id="cb61-346"><a href="#cb61-346" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>While rm and medv probably stem from a normal distribution, features like dis, age, lstat, zn and crim may need transformations to satisfy normality;</span>
+<span id="cb61-347"><a href="#cb61-347" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The couple (rm, medv) shows a strong linear positive relationship;</span>
+<span id="cb61-348"><a href="#cb61-348" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The couple (rm,lstat) shows a negative non-linear relationship.</span>
+<span id="cb61-349"><a href="#cb61-349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-350"><a href="#cb61-350" aria-hidden="true" tabindex="-1"></a><span class="fu">### (d)</span></span>
+<span id="cb61-351"><a href="#cb61-351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-354"><a href="#cb61-354" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-355"><a href="#cb61-355" aria-hidden="true" tabindex="-1"></a>Boston.corrwith(Boston[<span class="st">'crim'</span>])</span>
+<span id="cb61-356"><a href="#cb61-356" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-357"><a href="#cb61-357" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-358"><a href="#cb61-358" aria-hidden="true" tabindex="-1"></a>Most important correlations with 'crim' feature are discovered with both 'rad' and 'tax' features.<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span></span>
+<span id="cb61-359"><a href="#cb61-359" aria-hidden="true" tabindex="-1"></a>As per 'rad the adapted visualization is a boxplot, since this predictor take discrete values.</span>
+<span id="cb61-360"><a href="#cb61-360" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-363"><a href="#cb61-363" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-364"><a href="#cb61-364" aria-hidden="true" tabindex="-1"></a><span class="co">#Boxplot of crim by rad</span></span>
+<span id="cb61-365"><a href="#cb61-365" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
+<span id="cb61-366"><a href="#cb61-366" aria-hidden="true" tabindex="-1"></a>Boston.boxplot(<span class="st">'crim'</span>, by<span class="op">=</span><span class="st">'rad'</span>, ax<span class="op">=</span>ax)<span class="op">;</span></span>
+<span id="cb61-367"><a href="#cb61-367" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-368"><a href="#cb61-368" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-369"><a href="#cb61-369" aria-hidden="true" tabindex="-1"></a>When the index of accessibility to radial highways is at the max (rad=24), the crime per capita rate is much higher both for median value and range.</span>
+<span id="cb61-370"><a href="#cb61-370" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-373"><a href="#cb61-373" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-374"><a href="#cb61-374" aria-hidden="true" tabindex="-1"></a><span class="co">#Boxplot of crim by tax</span></span>
+<span id="cb61-375"><a href="#cb61-375" aria-hidden="true" tabindex="-1"></a>plt.scatter(Boston[<span class="st">'tax'</span>], Boston[<span class="st">'crim'</span>])<span class="op">;</span></span>
+<span id="cb61-376"><a href="#cb61-376" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-377"><a href="#cb61-377" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-380"><a href="#cb61-380" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-381"><a href="#cb61-381" aria-hidden="true" tabindex="-1"></a>Boston[<span class="st">'tax'</span>].iloc[Boston[<span class="st">'crim'</span>].argmax()]</span>
+<span id="cb61-382"><a href="#cb61-382" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-383"><a href="#cb61-383" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-384"><a href="#cb61-384" aria-hidden="true" tabindex="-1"></a>When the taxe rate is high (tax=666) the crime rate per capita reaches the max value as well as the largest range.</span>
+<span id="cb61-385"><a href="#cb61-385" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-386"><a href="#cb61-386" aria-hidden="true" tabindex="-1"></a><span class="fu">### (e)</span></span>
+<span id="cb61-387"><a href="#cb61-387" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-390"><a href="#cb61-390" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-391"><a href="#cb61-391" aria-hidden="true" tabindex="-1"></a><span class="co">#Top ten suburbs with high crime rate</span></span>
+<span id="cb61-392"><a href="#cb61-392" aria-hidden="true" tabindex="-1"></a>Boston.iloc[Boston[<span class="st">'crim'</span>].nlargest(<span class="dv">10</span>).index]</span>
+<span id="cb61-393"><a href="#cb61-393" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-394"><a href="#cb61-394" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-395"><a href="#cb61-395" aria-hidden="true" tabindex="-1"></a>The top 10 suburbs with crime rate all have a taxe rate of 666 and a ptratio of 20.2</span>
+<span id="cb61-396"><a href="#cb61-396" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-399"><a href="#cb61-399" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-400"><a href="#cb61-400" aria-hidden="true" tabindex="-1"></a><span class="co">#Top ten suburbs with high tax rate</span></span>
+<span id="cb61-401"><a href="#cb61-401" aria-hidden="true" tabindex="-1"></a>Boston.iloc[Boston[<span class="st">'tax'</span>].nlargest(<span class="dv">10</span>).index]</span>
+<span id="cb61-402"><a href="#cb61-402" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-403"><a href="#cb61-403" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-404"><a href="#cb61-404" aria-hidden="true" tabindex="-1"></a>The top 10 suburbs with tax rate all have a particularly high ptratio between 20.1 and 20.2</span>
+<span id="cb61-405"><a href="#cb61-405" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-408"><a href="#cb61-408" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-409"><a href="#cb61-409" aria-hidden="true" tabindex="-1"></a><span class="co">#Top ten suburbs with high tax rate</span></span>
+<span id="cb61-410"><a href="#cb61-410" aria-hidden="true" tabindex="-1"></a>Boston.iloc[Boston[<span class="st">'ptratio'</span>].nlargest(<span class="dv">10</span>).index]</span>
+<span id="cb61-411"><a href="#cb61-411" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-412"><a href="#cb61-412" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-413"><a href="#cb61-413" aria-hidden="true" tabindex="-1"></a>The top 10 suburbs with ptration have a low rates far away below the max value of 88.97%.</span>
+<span id="cb61-414"><a href="#cb61-414" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-415"><a href="#cb61-415" aria-hidden="true" tabindex="-1"></a><span class="fu">### (f)</span></span>
+<span id="cb61-416"><a href="#cb61-416" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-419"><a href="#cb61-419" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-420"><a href="#cb61-420" aria-hidden="true" tabindex="-1"></a><span class="co"># The value of chas is 1 1 if the suburb tracts bounds river</span></span>
+<span id="cb61-421"><a href="#cb61-421" aria-hidden="true" tabindex="-1"></a>Boston[<span class="st">'chas'</span>].value_counts()[<span class="dv">1</span>]</span>
+<span id="cb61-422"><a href="#cb61-422" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-423"><a href="#cb61-423" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-424"><a href="#cb61-424" aria-hidden="true" tabindex="-1"></a>There are 35 suburbs which bound the Charles river</span>
+<span id="cb61-425"><a href="#cb61-425" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-426"><a href="#cb61-426" aria-hidden="true" tabindex="-1"></a><span class="fu">### (g)</span></span>
+<span id="cb61-427"><a href="#cb61-427" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-430"><a href="#cb61-430" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-431"><a href="#cb61-431" aria-hidden="true" tabindex="-1"></a>Boston[<span class="st">'ptratio'</span>].median()</span>
+<span id="cb61-432"><a href="#cb61-432" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-433"><a href="#cb61-433" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-434"><a href="#cb61-434" aria-hidden="true" tabindex="-1"></a><span class="fu">### (h)</span></span>
+<span id="cb61-435"><a href="#cb61-435" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-438"><a href="#cb61-438" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-439"><a href="#cb61-439" aria-hidden="true" tabindex="-1"></a>Boston[<span class="st">'medv'</span>].argmin()</span>
+<span id="cb61-440"><a href="#cb61-440" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-441"><a href="#cb61-441" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-444"><a href="#cb61-444" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-445"><a href="#cb61-445" aria-hidden="true" tabindex="-1"></a>Boston.loc[<span class="dv">398</span>]</span>
+<span id="cb61-446"><a href="#cb61-446" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-447"><a href="#cb61-447" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-450"><a href="#cb61-450" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-451"><a href="#cb61-451" aria-hidden="true" tabindex="-1"></a>Boston.describe()</span>
+<span id="cb61-452"><a href="#cb61-452" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-453"><a href="#cb61-453" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-454"><a href="#cb61-454" aria-hidden="true" tabindex="-1"></a>The suburb no 398 has the lowest median value of owner occupied homes.<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span></span>
+<span id="cb61-455"><a href="#cb61-455" aria-hidden="true" tabindex="-1"></a>As far as this suburb is concerned, the other predictors are located in the following quantiles:</span>
+<span id="cb61-456"><a href="#cb61-456" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Above 75% quantile  we find crim, indus, nox, age, rad, tax, ptratio and lstat. Particularly, age, rad and ptratio attend their max values;</span>
+<span id="cb61-457"><a href="#cb61-457" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Below 25% quantile we find zn, rm, dis and medv. Particularly, both medv and zn attend their min value.</span>
+<span id="cb61-458"><a href="#cb61-458" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-459"><a href="#cb61-459" aria-hidden="true" tabindex="-1"></a><span class="fu">### (i)</span></span>
+<span id="cb61-460"><a href="#cb61-460" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-463"><a href="#cb61-463" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-464"><a href="#cb61-464" aria-hidden="true" tabindex="-1"></a><span class="co">#More than average of 7 rooms per dwelling</span></span>
+<span id="cb61-465"><a href="#cb61-465" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(Boston[Boston[<span class="st">'rm'</span>]<span class="op">&gt;</span><span class="dv">7</span>])</span>
+<span id="cb61-466"><a href="#cb61-466" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-467"><a href="#cb61-467" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-470"><a href="#cb61-470" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-471"><a href="#cb61-471" aria-hidden="true" tabindex="-1"></a><span class="co">#More than average of 8 rooms per dwelling</span></span>
+<span id="cb61-472"><a href="#cb61-472" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(Boston[Boston[<span class="st">'rm'</span>]<span class="op">&gt;</span><span class="dv">8</span>])</span>
+<span id="cb61-473"><a href="#cb61-473" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-474"><a href="#cb61-474" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-477"><a href="#cb61-477" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb61-478"><a href="#cb61-478" aria-hidden="true" tabindex="-1"></a>Boston[Boston[<span class="st">'rm'</span>]<span class="op">&gt;</span><span class="dv">8</span>].describe()</span>
+<span id="cb61-479"><a href="#cb61-479" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb61-480"><a href="#cb61-480" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-481"><a href="#cb61-481" aria-hidden="true" tabindex="-1"></a>There are 64 and 13 suburbs which have more than 7 and 8 rooms per dewilling respectively.<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span></span>
+<span id="cb61-482"><a href="#cb61-482" aria-hidden="true" tabindex="-1"></a>Furthermore, the average of crime rate for the 13 suburbs is lower than crime rate for the whole population. However, median value of owner-occupied homes is larger as expected.</span>
+<span id="cb61-483"><a href="#cb61-483" aria-hidden="true" tabindex="-1"></a></span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
