@@ -1,0 +1,402 @@
+---
+title: "Statistical Learning Analysis Report"
+subtitle: "Chapter 2: ISLR2 Exercise Solutions"
+author: "Shad Ali Shah"
+date: today
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    toc-location: left
+    number-sections: true
+    number-depth: 3
+    code-fold: true
+    code-tools: true
+    code-summary: "Show code"
+    theme: cosmo
+    colorlinks: true
+    link-citations: true
+    df-print: kable
+    fig-cap-location: bottom
+    tbl-cap-location: top
+    crossref:
+      fig-title: "Figure"
+      tbl-title: "Table"
+      fig-prefix: "Fig."
+      tbl-prefix: "Table"
+execute:
+  echo: true
+  warning: false
+  message: false
+  error: true
+  cache: false
+  keep-going: true
+  fig-width: 6.5
+  fig-height: 4
+jupyter: python3
+---
+
+
+
+## Exercise 8
+
+```{python}
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from ISLP import load_data
+from matplotlib.pyplot import subplots
+```
+
+### (a)
+
+```{python}
+college=pd.read_csv('College.csv')
+```
+
+### (b)
+
+```{python}
+college.head()
+```
+
+```{python}
+college2 = pd.read_csv('College.csv', index_col =0)
+college3 = college.rename({'Unnamed: 0': 'College'},axis=1)
+college3 = college3.set_index('College')
+```
+
+```{python}
+college=college3
+```
+
+```{python}
+college.head()
+```
+
+### (c)
+
+```{python}
+college.describe()
+```
+
+### (d)
+
+```{python}
+pd.plotting.scatter_matrix(college[['Top10perc','Apps','Enroll']]);
+```
+
+### (e)
+
+```{python}
+fig, ax = subplots(figsize=(8, 8))
+college.boxplot('Outstate', by='Private', ax=ax);
+```
+
+### (f)
+
+```{python}
+college['Elite'] = pd.cut(college['Top10perc'],bins=2,labels=['No','Yes'])
+#The exact formula provided by the exercise instructions did not work. In fact many observations 
+#remained void.
+```
+
+```{python}
+college.value_counts(college['Elite'])
+```
+
+```{python}
+fig, ax = subplots(figsize=(8, 8))
+college.boxplot('Outstate', by='Elite', ax=ax);
+```
+
+### (g)
+
+```{python}
+fig, axes =plt.subplots(nrows=2,ncols= 2,figsize=(12,12))
+college['Apps'].plot.hist(ax=axes[0,0])
+college['Accept'].plot.hist(ax=axes[0,1])
+college['Enroll'].plot.hist(ax=axes[1,0])
+college['Outstate'].plot.hist(ax=axes[1,1]);
+# We can create bins for each of the plotted columns
+```
+
+### (h)
+
+First, let's check the type of each feature in the data set. We can do this using the info() function.
+
+```{python}
+college.info()
+```
+
+All the features are numerical, except for 'Elite' and 'Private'. It's recommended to convert 'Private' to a 'category' type instead of keeping it as an object to prevent potential errors when using this feature in specific functions.
+
+```{python}
+college['Private']=college['Private'].astype('category')
+```
+
+We define three segments for the data set:
+
+'Faculty': This segment includes features related to the faculty, such as 'PhD', 'Terminal', and 'S.F.Ratio'.
+
+'Students': This segment includes features that are of interest to students, like 'Apps', 'Accept', 'Enroll', 'Top10perc', 'Top25perc', 'F.Undergrad', 'P.Undergrad', and 'Grad.Rate'.
+
+'Finance': This segment includes features related to the university's business model, including 'Private', 'Outstate', 'Room.Board', 'Books', 'Personal', 'perc.alumni', and 'Expend'.
+
+A university might be interested in the number of students enrolled each year as a dependent variable, which could serve as a good indicator of the university’s performance and popularity. We will focus on univariate analysis from this perspective.
+
+Our expectations for Outstate tuition are as follows:
+
+The dependent variable should be related to both 'Top10perc' and 'Top25perc'.
+
+The 'F.Undergrad' attribute is likely important in predicting the dependent variable.
+
+The 'Apps' and 'Accept' attributes should also be related to 'Enroll', as students tend to apply more where they are likely to be accepted, which increases enrollment numbers.
+
+Now, let's check these hypotheses by creating scatterplots.
+
+```{python}
+pd.plotting.scatter_matrix(college[['Enroll','F.Undergrad','Top10perc','Top25perc','Accept',
+                                    'Apps','Outstate']]);
+```
+
+As expected, Enroll looks positively correlated with Accept, F.Undergrad and Apps. However, the relationships with the other attributes look less evident. 
+We should then focus on those three features as independent variables.
+
+```{python}
+#| echo: false
+
+import pandas as pd
+from ISLP import load_data
+
+# Load and save the College dataset
+college_data = load_data('College')
+college_data.to_csv('College.csv')
+
+# Read the dataset
+college = pd.read_csv('College.csv', index_col=0)
+
+# Select only numeric columns for correlation
+numeric_cols = college.select_dtypes(include='number')
+correlation_matrix = numeric_cols.corr()
+
+# Display the correlation matrix
+print(correlation_matrix)
+```
+
+Both correlation matrix and scatterplots show that 'Apps', 'F.Undergrad' and 'Accept' are twin brothers. We should choose one of them and let it be 'Accept'. We could also argue that there is a nonlinear relationship between the dependent variable and 'Outstate'. The same thing could be noticed with 'Top10perc'. 
+
+Our choice finally lands on 'Accept', 'Outstate' and 'Top10perc' as independent variables.
+
+Hopefully there are no missing data as we can notice from previous outputs. The data set contains 777 entries and all the features show the same count of inputs.
+
+Now let's look for outliars. Unfortunately the process of finding outliers can be tieresome and not adapted to the question instruction. The process intails dectecting potential outliers using univariate, bivariate and multivariate analysis accross the whole data set, then trying to classify each potential outlier and spot the variable or the reasons behind it.<br>
+Consequently, we assume here that there is no aberrant outlier among all the potential ones. Hence, in order to preserve the generalizability of the population features they must all be retained.
+
+Instead of searching outliars we check below whether there are inconsistant observations. The inconsistency can be found by comparing the triplet'Apps', 'Accept' and 'Enroll' for each observation.<br>
+In fact, for every university the number of applications should logically be greater than number of accepted students which in turn should be greater than the number of students enrolled.<br>
+Below we discover that such inconsistencies does not exist in the data set.
+
+```{python}
+college.loc[lambda college:college['Apps']<college['Accept']].count()
+```
+
+```{python}
+college.loc[lambda college:college['Accept']<college['Enroll']].count()
+```
+
+Further exploration can be left to the reader. Next steps can include the verfication of normality, homoscedasticity, correlated errors and linearty.<br> 
+The interested reader can find more in the following references:
+- Data Preparation for Machine Learning Data Cleaning, Feature Selection, and Data Transforms in Python by Jason Brownlee;
+- Multivariate Data Analysis by Joseph F. Hair et al., 8th edition.
+
+## Exercise 9
+
+```{python}
+Auto=load_data('Auto')
+```
+
+```{python}
+Auto.columns
+```
+
+```{python}
+for col in Auto.columns:
+    template = 'Column "{0}" has {1} missing values'
+    print(template.format(col,pd.isnull(Auto[col]).sum()))
+```
+
+There is no missing value in the data set.
+
+### (a)
+
+```{python}
+Auto.info()
+```
+
+All predictors are quantitative except for the 'name' feature. 
+
+### (b) and (c)
+
+```{python}
+#The method describe() does the job automatically for all quantitative columns
+Auto.describe()
+```
+
+### (d)
+
+```{python}
+Auto_b=Auto.drop(Auto.index[10:85])
+Auto_b.describe()
+```
+
+Differences are noticeable between both previous tables.
+
+### (e)
+
+```{python}
+pd.plotting.scatter_matrix(Auto,figsize=(12,12));
+```
+
+From the previous scatter plot we can draw the following preliminary conclusions:<br>
+- While acceleration envokes a normal distribution, both weight and mpg show flat tails like normal distribution and skewness;
+- The couples (displacement,weight), (horsepower, weight) and (horsepower, displacement) show strong linear relationships;
+- The couples (mpg,weight), (horsepower, mpg) and (mpg, displacement) show non-linear relationships.
+
+### (f)
+
+Based on the conclusions of the previous question, we elect the features 'weight', 'horsepower' and 'displacement' as to be predictors of 'mpg'. Further investigations must be done to find the best model and evaluate whether the interlying relationships are significant.
+
+## Exercise 10
+
+### (a)
+
+```{python}
+Boston=load_data('Boston')
+```
+
+### (b)
+
+```{python}
+Boston.shape
+```
+
+The previous instruction shows that Boston data set contains 506 lines and 13 columns.<br>
+Each row is a town in Boston area. Columns are factors which can influence house prices.
+
+### (c)
+
+```{python}
+pd.plotting.scatter_matrix(Boston,figsize=(12,12));
+```
+
+From the previous scatter plot we can draw the following preliminary conclusions:<br>
+- While rm and medv probably stem from a normal distribution, features like dis, age, lstat, zn and crim may need transformations to satisfy normality;
+- The couple (rm, medv) shows a strong linear positive relationship;
+- The couple (rm,lstat) shows a negative non-linear relationship.
+
+### (d)
+
+```{python}
+Boston.corrwith(Boston['crim'])
+```
+
+Most important correlations with 'crim' feature are discovered with both 'rad' and 'tax' features.<br>
+As per 'rad the adapted visualization is a boxplot, since this predictor take discrete values.
+
+```{python}
+#Boxplot of crim by rad
+fig, ax = subplots(figsize=(8, 8))
+Boston.boxplot('crim', by='rad', ax=ax);
+```
+
+When the index of accessibility to radial highways is at the max (rad=24), the crime per capita rate is much higher both for median value and range.
+
+```{python}
+#Boxplot of crim by tax
+plt.scatter(Boston['tax'], Boston['crim']);
+```
+
+```{python}
+Boston['tax'].iloc[Boston['crim'].argmax()]
+```
+
+When the taxe rate is high (tax=666) the crime rate per capita reaches the max value as well as the largest range.
+
+### (e)
+
+```{python}
+#Top ten suburbs with high crime rate
+Boston.iloc[Boston['crim'].nlargest(10).index]
+```
+
+The top 10 suburbs with crime rate all have a taxe rate of 666 and a ptratio of 20.2
+
+```{python}
+#Top ten suburbs with high tax rate
+Boston.iloc[Boston['tax'].nlargest(10).index]
+```
+
+The top 10 suburbs with tax rate all have a particularly high ptratio between 20.1 and 20.2
+
+```{python}
+#Top ten suburbs with high tax rate
+Boston.iloc[Boston['ptratio'].nlargest(10).index]
+```
+
+The top 10 suburbs with ptration have a low rates far away below the max value of 88.97%.
+
+### (f)
+
+```{python}
+# The value of chas is 1 1 if the suburb tracts bounds river
+Boston['chas'].value_counts()[1]
+```
+
+There are 35 suburbs which bound the Charles river
+
+### (g)
+
+```{python}
+Boston['ptratio'].median()
+```
+
+### (h)
+
+```{python}
+Boston['medv'].argmin()
+```
+
+```{python}
+Boston.loc[398]
+```
+
+```{python}
+Boston.describe()
+```
+
+The suburb no 398 has the lowest median value of owner occupied homes.<br>
+As far as this suburb is concerned, the other predictors are located in the following quantiles:
+- Above 75% quantile  we find crim, indus, nox, age, rad, tax, ptratio and lstat. Particularly, age, rad and ptratio attend their max values;
+- Below 25% quantile we find zn, rm, dis and medv. Particularly, both medv and zn attend their min value.
+
+### (i)
+
+```{python}
+#More than average of 7 rooms per dwelling
+len(Boston[Boston['rm']>7])
+```
+
+```{python}
+#More than average of 8 rooms per dwelling
+len(Boston[Boston['rm']>8])
+```
+
+```{python}
+Boston[Boston['rm']>8].describe()
+```
+
+There are 64 and 13 suburbs which have more than 7 and 8 rooms per dewilling respectively.<br>
+Furthermore, the average of crime rate for the 13 suburbs is lower than crime rate for the whole population. However, median value of owner-occupied homes is larger as expected.
+
+
